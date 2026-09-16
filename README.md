@@ -81,7 +81,7 @@ The file `exported_triggers.bttpreset` contains the BetterTouchTool presets, org
 | `Fn + Tab` | `Super + Tab` | Move Right a Space (Next Desktop) |
 | `Fn + Shift + Tab` | `Super + Shift + Tab` | Move Left a Space (Previous Desktop) |
 | `Fn + 1` / `2` / `3` / `4` | `Super + 1` / `2` / `3` / `4` | Switch to Desktop 1 / 2 / 3 / 4 |
-| `Fn + Shift + 1` / `2` / `3` | `Super + Shift + 1` / `2` / `3` | Move Window to Desktop 1 / 2 / 3 |
+| `Fn + Shift + 1` / `2` / `3` / `4` | `Super + Shift + 1` / `2` / `3` / `4` | Move Window to Desktop 1 / 2 / 3 / 4 |
 | `Fn + W` | `Super + W` / `Super + Q` | Quit / Close app under cursor |
 | `Fn + Alt + Space` | `Super + Alt + Space` | Show Apps Menu (Spotlight / Launchpad) |
 
@@ -91,7 +91,7 @@ The file `exported_triggers.bttpreset` contains the BetterTouchTool presets, org
 | `Fn + Alt + F` | `Super + Alt + F` | macOS Window Tiling: Fill Screen |
 | `Alt + Tab` | `Alt + Tab` | Stage Manager: Cycle Through Stages (Forward) |
 | `Shift + Alt + Tab` | `Alt + Shift + Tab` | Stage Manager: Cycle Through Stages (Backwards) |
-| `Fn + Shift + Alt + ,` | — | Show Notification Center |
+| `Fn + Shift + Alt + ,` | `Super + Shift + Alt + ,` | Show Notification Center (Omarchy: Open notification history) |
 
 *(Experimental / Under Test)*:
 - `Fn + Escape`: Sleep Display (`Super + Escape` System menu)
@@ -135,6 +135,18 @@ ln -s "$(pwd)/config.toml" ~/.config/herdr/config.toml
 
 ---
 
+## Intentional Liberties & macOS Customizations
+
+While our primary goal is to recreate the Omarchy hotkey experience on macOS, a few deliberate departures are made to take advantage of native macOS ergonomics:
+
+- **Password Manager (`Shift + ⌘ + /`)**:  
+  Rather than binding `Fn + Shift + /`, we take the liberty of using the macOS `⌘ Command` key (`Shift + ⌘ + /`) for **Bitwarden**. Password managers on macOS interface heavily with native applications, accessibility prompts, and browser extensions. Using `⌘` for Bitwarden keeps global autofill/search frictionless without colliding with terminal or window-management bindings.
+
+- **Clipboard Manager (`Ctrl + ⌘ + V`)**:  
+  Omarchy provides built-in unified clipboard history out of the box (via `cliphist`). On macOS, clipboard history is configured in **[Vorssaint](https://vorssaint.com)** using the global shortcut `Ctrl + ⌘ + V`. This provides instantaneous clipboard history access across all apps without conflicting with standard paste (`⌘V`) or terminal control sequences.
+
+---
+
 ## Omarchy Hotkeys Reference & Status Tracker
 
 From the [Omarchy Hotkeys Manual](https://github.com/omacom/omarchy/blob/quattro/manual/07-hotkeys.md):
@@ -153,7 +165,8 @@ From the [Omarchy Hotkeys Manual](https://github.com/omacom/omarchy/blob/quattro
 - [x] `Super + 1/2/3/4`: Jump to specific workspace &rarr; `Fn + 1/2/3/4` (Switch to Desktop 1–4)
 - [x] `Super + Tab`: Jump to next workspace &rarr; `Fn + Tab` (Move Right a Space)
 - [x] `Super + Shift + Tab`: Jump to previous workspace &rarr; `Fn + Shift + Tab` (Move Left a Space)
-- [x] `Super + Shift + 1/2/3/4`: Move window to workspace &rarr; `Fn + Shift + 1/2/3` (Move Window to Desktop 1–3)
+- [x] `Super + Shift + 1/2/3/4`: Move window to workspace &rarr; `Fn + Shift + 1/2/3/4` (Move Window to Desktop 1–4)
+- [x] `Super + Shift + Alt + ,`: Open notification history &rarr; `Fn + Shift + Alt + ,` (Show Notification Center)
 - [ ] `Super + Arrow`: Move focus to window in direction of arrow
 - [ ] `Super + Shift + Arrow`: Swap window with another in direction of arrow
 

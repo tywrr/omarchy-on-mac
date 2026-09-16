@@ -372,7 +372,7 @@
     }
   },
   {
-    "BTTLastUpdatedAt" : 1789541547.729928,
+    "BTTLastUpdatedAt" : 1789543850.125742,
     "BTTTriggerType" : 630,
     "BTTTriggerTypeDescriptionReadOnly" : "Group",
     "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -385,7 +385,7 @@
     "BTTAutoAdaptToKeyboardLayout" : 0,
     "BTTActionsToExecute" : [
       {
-        "BTTLastUpdatedAt" : 1789541398.3537312,
+        "BTTLastUpdatedAt" : 1789543850.1255951,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -412,7 +412,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.353802,
+        "BTTLastUpdatedAt" : 1789543850.125695,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -439,7 +439,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.353858,
+        "BTTLastUpdatedAt" : 1789543850.1256819,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -466,7 +466,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.3537509,
+        "BTTLastUpdatedAt" : 1789543850.1256099,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -493,7 +493,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.3537641,
+        "BTTLastUpdatedAt" : 1789543850.125639,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -509,18 +509,45 @@
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
-            "BTTLastUpdatedAt" : 1789529428.7853551,
+            "BTTLastUpdatedAt" : 1789543667.321713,
             "BTTTriggerParentUUID" : "50CE3485-3C35-4469-94B7-E4125E4CCFB4",
             "BTTIsPureAction" : true,
             "BTTUUID" : "5F748D8D-A2C1-4ADF-815D-18EDD8FE08D7",
-            "BTTPredefinedActionType" : 217,
-            "BTTPredefinedActionName" : "Move Window To Desktop 2",
+            "BTTPredefinedActionType" : 218,
+            "BTTPredefinedActionName" : "Move Window To Desktop 3",
             "BTTOrder" : 4
           }
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789537238.6782231,
+        "BTTLastUpdatedAt" : 1789543850.133791,
+        "BTTTriggerType" : 0,
+        "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
+        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+        "BTTUUID" : "0F6D44E8-6809-451C-B58C-6F494E8F0BDA",
+        "BTTAdditionalConfiguration" : "8519682",
+        "BTTShortcutKeyboardType" : -2052004921,
+        "BTTTriggerOnDown" : 1,
+        "BTTLayoutIndependentChar" : "4",
+        "BTTShortcutKeyCode" : 21,
+        "BTTShortcutAdvancedModifierKeys" : "8519682",
+        "BTTShortcutModifierKeys" : 8519680,
+        "BTTOrder" : 5,
+        "BTTAutoAdaptToKeyboardLayout" : 0,
+        "BTTActionsToExecute" : [
+          {
+            "BTTLastUpdatedAt" : 1789543857.6724792,
+            "BTTTriggerParentUUID" : "0F6D44E8-6809-451C-B58C-6F494E8F0BDA",
+            "BTTIsPureAction" : true,
+            "BTTUUID" : "15AF7492-4E55-4C69-AB60-8006723A97AF",
+            "BTTPredefinedActionType" : 219,
+            "BTTPredefinedActionName" : "Move Window To Desktop 4",
+            "BTTOrder" : 4
+          }
+        ]
+      },
+      {
+        "BTTLastUpdatedAt" : 1789543850.125654,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -532,7 +559,7 @@
         "BTTShortcutKeyCode" : 18,
         "BTTShortcutAdvancedModifierKeys" : "8388608",
         "BTTShortcutModifierKeys" : 8388608,
-        "BTTOrder" : 5,
+        "BTTOrder" : 6,
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
@@ -547,7 +574,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541486.371901,
+        "BTTLastUpdatedAt" : 1789543850.125577,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -559,7 +586,7 @@
         "BTTShortcutKeyCode" : 20,
         "BTTShortcutAdvancedModifierKeys" : "8388608",
         "BTTShortcutModifierKeys" : 8388608,
-        "BTTOrder" : 6,
+        "BTTOrder" : 7,
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
@@ -575,7 +602,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.360589,
+        "BTTLastUpdatedAt" : 1789543850.125668,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -587,7 +614,7 @@
         "BTTShortcutKeyCode" : 19,
         "BTTShortcutAdvancedModifierKeys" : "8388608",
         "BTTShortcutModifierKeys" : 8388608,
-        "BTTOrder" : 6,
+        "BTTOrder" : 8,
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
@@ -603,34 +630,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.3538699,
-        "BTTTriggerType" : 0,
-        "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
-        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
-        "BTTUUID" : "1C76B1FA-A19F-4A6F-835E-667FD3264748",
-        "BTTAdditionalConfiguration" : "8388608",
-        "BTTShortcutKeyboardType" : -2052004921,
-        "BTTTriggerOnDown" : 1,
-        "BTTLayoutIndependentChar" : "w",
-        "BTTShortcutKeyCode" : 13,
-        "BTTShortcutAdvancedModifierKeys" : "8388608",
-        "BTTShortcutModifierKeys" : 8388608,
-        "BTTOrder" : 7,
-        "BTTAutoAdaptToKeyboardLayout" : 0,
-        "BTTActionsToExecute" : [
-          {
-            "BTTLastUpdatedAt" : 1789528559.632134,
-            "BTTTriggerParentUUID" : "1C76B1FA-A19F-4A6F-835E-667FD3264748",
-            "BTTIsPureAction" : true,
-            "BTTUUID" : "DA42BCCD-4790-449A-A740-ADD695760DD6",
-            "BTTPredefinedActionType" : 247,
-            "BTTPredefinedActionName" : "Quit App Under Cursor",
-            "BTTOrder" : 7
-          }
-        ]
-      },
-      {
-        "BTTLastUpdatedAt" : 1789541287.696965,
+        "BTTLastUpdatedAt" : 1789543850.125788,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -642,7 +642,7 @@
         "BTTShortcutKeyCode" : 21,
         "BTTShortcutAdvancedModifierKeys" : "8388608",
         "BTTShortcutModifierKeys" : 8388608,
-        "BTTOrder" : 7,
+        "BTTOrder" : 9,
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
@@ -658,7 +658,34 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789541398.3537779,
+        "BTTLastUpdatedAt" : 1789543850.1257591,
+        "BTTTriggerType" : 0,
+        "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
+        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+        "BTTUUID" : "1C76B1FA-A19F-4A6F-835E-667FD3264748",
+        "BTTAdditionalConfiguration" : "8388608",
+        "BTTShortcutKeyboardType" : -2052004921,
+        "BTTTriggerOnDown" : 1,
+        "BTTLayoutIndependentChar" : "w",
+        "BTTShortcutKeyCode" : 13,
+        "BTTShortcutAdvancedModifierKeys" : "8388608",
+        "BTTShortcutModifierKeys" : 8388608,
+        "BTTOrder" : 10,
+        "BTTAutoAdaptToKeyboardLayout" : 0,
+        "BTTActionsToExecute" : [
+          {
+            "BTTLastUpdatedAt" : 1789528559.632134,
+            "BTTTriggerParentUUID" : "1C76B1FA-A19F-4A6F-835E-667FD3264748",
+            "BTTIsPureAction" : true,
+            "BTTUUID" : "DA42BCCD-4790-449A-A740-ADD695760DD6",
+            "BTTPredefinedActionType" : 247,
+            "BTTPredefinedActionName" : "Quit App Under Cursor",
+            "BTTOrder" : 7
+          }
+        ]
+      },
+      {
+        "BTTLastUpdatedAt" : 1789543850.1257739,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "92907516-8414-46BD-8750-E5634D218E76",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -670,7 +697,7 @@
         "BTTShortcutKeyCode" : 49,
         "BTTShortcutAdvancedModifierKeys" : "8912928",
         "BTTShortcutModifierKeys" : 8912896,
-        "BTTOrder" : 8,
+        "BTTOrder" : 11,
         "BTTAutoAdaptToKeyboardLayout" : 0,
         "BTTActionsToExecute" : [
           {
