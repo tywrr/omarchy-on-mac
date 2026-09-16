@@ -31,7 +31,7 @@ We chose the **`Fn` / Globe key** as our `Super` replacement:
 - **Underutilized**: In macOS, `Fn` / Globe is rarely used for primary workflows (mostly dictation or emoji picker).
 - **Ergonomic Positioning**: It is located in the bottom-left corner right alongside `Control`, `Option`, and `Command`, making modifier chording natural.
 - **Preserves Secondary Modifiers**: With `Fn` as the base modifier, `Shift`, `Option` (`Alt`), and `Control` remain completely independent. You can press `Fn + Shift`, `Fn + Alt`, or `Fn + Ctrl` just like `Super + Shift`, `Super + Alt`, and `Super + Ctrl` in Omarchy.
-- **Enabled by BetterTouchTool**: BetterTouchTool natively allows using `Fn` / Globe as a modifier key, avoiding the need for low-level kernel drivers.
+- **Enabled by BetterTouchTool**: BetterTouchTool natively allows using `Fn` / Globe as a modifier key without requiring low-level system extensions or kernel-level drivers. Other popular utilities (such as [hyperkey.app](https://hyperkey.app), [vorssaint.com](https://vorssaint.com), and similar tools) do not offer `Fn` / Globe as a standalone modifier. While Karabiner-Elements can remap keys, it has limitations with modern macOS `Fn`/Globe handling, and its requirement for system extensions / virtual HID drivers often blocks it on corporate-managed MacBooks under strict MDM policies. BetterTouchTool works cleanly in user space without these hurdles.
 
 ---
 
