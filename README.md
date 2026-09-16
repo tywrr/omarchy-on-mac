@@ -1,22 +1,43 @@
 # Omarchy on Mac
 
-Recreating many of the [Omarchy](https://github.com/omacom/omarchy) hotkeys and workflow on macOS.
+Recreating many of the [Omarchy](https://github.com/omacom/omarchy) hotkeys and keyboard-driven workflow on macOS.
 
-## Overview
+---
 
-[Omarchy](https://github.com/omacom/omarchy) is an opinionated Arch Linux distribution (utilizing Hyprland) created by DHH / Omacom. It heavily relies on keyboard-driven workflows using the `Super` key.
+## Design Philosophy: Approximating "Super" on macOS
 
-On macOS, the `Command` (`⌘`) modifier is already tied to standard macOS application shortcuts. To replicate the Omarchy experience without collisions, we use **BetterTouchTool (BTT)** because it allows configuring the **`Fn` / Globe key** as a modifier. This serves as the macOS equivalent to Omarchy's `Super` key.
+This project is an approximation designed to get as close as possible to Omarchy's keyboard-centric workflow on macOS.
 
-This repository tracks:
-1. **BetterTouchTool Presets** (`exported_triggers.bttpreset`): Shortcuts and window/app management rules to import on any Mac.
-2. **Herdr Configuration** (`config.toml`): Configuration for [Herdr](https://github.com/omacom/omarchy), the terminal/agent manager, symlinked into `~/.config/herdr/config.toml`.
+### The Problem with macOS Modifiers
+In Omarchy (based on Arch Linux + Hyprland), the primary modifier key is **`Super`** (the Windows key). Recreating this on macOS presents unique challenges:
+
+1. **Why not `⌘ Command`?**  
+   macOS uses `⌘ Command` for virtually every system and application shortcut (`⌘C`, `⌘V`, `⌘Q`, `⌘W`, `⌘Space`, tab navigation, etc.). Rebinding `Command` breaks fundamental macOS conventions and clashes with deeply ingrained muscle memory.
+
+2. **Why not a "Hyperkey" (`Cmd + Ctrl + Opt + Shift`)?**  
+   A popular macOS power-user technique is binding a single key to a "Hyperkey" (all four modifiers pressed simultaneously). While this avoids shortcut collisions, **it completely eliminates Omarchy's modifier layering**. Omarchy heavily relies on layering additional modifiers onto `Super`:
+   - `Super + [Key]` (Primary action)
+   - `Super + Shift + [Key]` (Secondary or reverse action)
+   - `Super + Alt + [Key]` (Alternate mode or secondary application)
+   - `Super + Ctrl + [Key]` (System or manager action)  
+   Because a Hyperkey already consumes `Shift`, `Alt` (`Option`), and `Ctrl`, you lose the ability to use them as sub-modifiers.
+
+3. **Why not `Caps Lock`?**  
+   For long-time Vim users, `Caps Lock` is dedicated to `Escape`. Having `Escape` on the home row is critical for Vim and modal editing.  
+   *(Note: For users who don't already map Caps Lock to Escape, using Caps Lock as the modifier—or configuring dual-role tap for `Escape` / hold for a modifier via tools like Karabiner-Elements—is a great alternative).*
+
+### The Solution: `Fn` / Globe via BetterTouchTool
+We chose the **`Fn` / Globe key** as our `Super` replacement:
+- **Underutilized**: In macOS, `Fn` / Globe is rarely used for primary workflows (mostly dictation or emoji picker).
+- **Ergonomic Positioning**: It is located in the bottom-left corner right alongside `Control`, `Option`, and `Command`, making modifier chording natural.
+- **Preserves Secondary Modifiers**: With `Fn` as the base modifier, `Shift`, `Option` (`Alt`), and `Control` remain completely independent. You can press `Fn + Shift`, `Fn + Alt`, or `Fn + Ctrl` just like `Super + Shift`, `Super + Alt`, and `Super + Ctrl` in Omarchy.
+- **Enabled by BetterTouchTool**: BetterTouchTool natively allows using `Fn` / Globe as a modifier key, avoiding the need for low-level kernel drivers.
 
 ---
 
 ## Source of Omarchy Hotkeys
 
-The source reference for the hotkeys we are building and porting to macOS comes directly from the official Omarchy repository:
+The source reference for the hotkeys we are building and porting comes directly from the upstream Omarchy repository:
 
 - **Omarchy Repository**: [https://github.com/omacom/omarchy](https://github.com/omacom/omarchy)
 - **Official Omarchy Hotkeys Manual**: [`manual/07-hotkeys.md`](https://github.com/omacom/omarchy/blob/quattro/manual/07-hotkeys.md)
@@ -26,15 +47,21 @@ The source reference for the hotkeys we are building and porting to macOS comes 
 
 ## BetterTouchTool Configuration (`exported_triggers.bttpreset`)
 
-The file `exported_triggers.bttpreset` contains the exported BetterTouchTool triggers.
+The file `exported_triggers.bttpreset` contains the BetterTouchTool presets, organized into groups matching Omarchy conventions.
 
 ### Importing to a New Mac
 1. Install [BetterTouchTool](https://folivora.ai/).
-2. Open BetterTouchTool -> Click **Presets** in the top right -> Choose **Import Preset**.
+2. Open BetterTouchTool -> Click **Presets** in the top-right -> Choose **Import Preset**.
 3. Select `exported_triggers.bttpreset` from this repository.
 
 ### Current BTT Hotkey Mappings (`Fn` as `Super`)
 
+#### General & Help
+| macOS Shortcut (`Fn` / Globe) | Omarchy Counterpart | Action |
+| :--- | :--- | :--- |
+| `Fn + K` | `Super + K` | Toggle Cheat Sheet |
+
+#### Launching Apps
 | macOS Shortcut (`Fn` / Globe) | Omarchy Counterpart | Action |
 | :--- | :--- | :--- |
 | `Fn + Return` | `Super + Return` | Launch Terminal (Ghostty) |
@@ -42,11 +69,30 @@ The file `exported_triggers.bttpreset` contains the exported BetterTouchTool tri
 | `Fn + Ctrl + Return` | `Super + Ctrl + Return` | Launch Herdr (`open -na Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"`) |
 | `Fn + Shift + N` | `Super + Shift + N` | Launch Editor (Zed) |
 | `Fn + Shift + F` | `Super + Shift + F` | Open File Manager (Finder) |
-| `Fn + W` | `Super + W` / `Super + Q` | Quit / Close app under cursor |
+| `Fn + Ctrl + Q` | `Super + Ctrl + Q` | Calculator |
+| `Shift + ⌘ + /` | `Super + Shift + /` | Password Manager (Bitwarden) |
+
+#### Navigating & Desktops
+| macOS Shortcut (`Fn` / Globe) | Omarchy Counterpart | Action |
+| :--- | :--- | :--- |
 | `Fn + Tab` | `Super + Tab` | Move Right a Space (Next Desktop) |
 | `Fn + Shift + Tab` | `Super + Shift + Tab` | Move Left a Space (Previous Desktop) |
-| `Fn + 1` / `2` / `3` | `Super + 1` / `2` / `3` | Switch to Desktop 1 / 2 / 3 |
+| `Fn + 1` / `2` / `3` / `4` | `Super + 1` / `2` / `3` / `4` | Switch to Desktop 1 / 2 / 3 / 4 |
 | `Fn + Shift + 1` / `2` / `3` | `Super + Shift + 1` / `2` / `3` | Move Window to Desktop 1 / 2 / 3 |
+| `Fn + W` | `Super + W` / `Super + Q` | Quit / Close app under cursor |
+| `Fn + Alt + Space` | `Super + Alt + Space` | Show Apps Menu (Spotlight / Launchpad) |
+
+#### Window Management & Stage Manager
+| macOS Shortcut | Omarchy Counterpart | Action |
+| :--- | :--- | :--- |
+| `Fn + Alt + F` | `Super + Alt + F` | macOS Window Tiling: Fill Screen |
+| `Alt + Tab` | `Alt + Tab` | Stage Manager: Cycle Through Stages (Forward) |
+| `Shift + Alt + Tab` | `Alt + Shift + Tab` | Stage Manager: Cycle Through Stages (Backwards) |
+| `Fn + Shift + Alt + ,` | — | Show Notification Center |
+
+*(Experimental / Under Test)*:
+- `Fn + Escape`: Sleep Display (`Super + Escape` System menu)
+- `Fn + S`: Stage Manager: Turn Recent Apps On or Off
 
 ---
 
