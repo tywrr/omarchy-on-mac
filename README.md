@@ -69,7 +69,10 @@ The file `exported_triggers.bttpreset` contains the BetterTouchTool presets, org
 | `Fn + Ctrl + Return` | `Super + Ctrl + Return` | Launch Herdr (`open -na Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"`) |
 | `Fn + Shift + N` | `Super + Shift + N` | Launch Editor (Zed) |
 | `Fn + Shift + F` | `Super + Shift + F` | Open File Manager (Finder) |
+| `Fn + Shift + C` | `Super + Shift + C` | Launch Calendar (Calendar.app) |
+| `Fn + Shift + E` | `Super + Shift + E` | Launch Email (Mail.app) |
 | `Fn + Ctrl + Q` | `Super + Ctrl + Q` | Calculator |
+| `Fn + Ctrl + L` | `Super + Ctrl + L` | Lock Screen |
 | `Shift + ⌘ + /` | `Super + Shift + /` | Password Manager (Bitwarden) |
 
 #### Navigating & Desktops
@@ -132,35 +135,37 @@ ln -s "$(pwd)/config.toml" ~/.config/herdr/config.toml
 
 ---
 
-## Omarchy Hotkeys Reference (Target List)
+## Omarchy Hotkeys Reference & Status Tracker
 
 From the [Omarchy Hotkeys Manual](https://github.com/omacom/omarchy/blob/quattro/manual/07-hotkeys.md):
 
 ### Navigating & Windows
-- `Super + Space`: Omarchy menu (apps and everything else)
-- `Super + Alt + Space`: Apps menu
-- `Super + Escape`: System menu (suspend, restart, etc)
-- `Super + Ctrl + L`: Lock computer
-- `Super + W` or `Super + Q`: Close window
-- `Ctrl + Alt + Del`: Close all windows
-- `Super + T`: Toggle window between tiling/floating
-- `Super + J`: Toggle window position (horizontal/vertical)
-- `Super + F`: Go full screen
-- `Super + 1/2/3/4`: Jump to specific workspace
-- `Super + Tab`: Jump to next workspace
-- `Super + Shift + Tab`: Jump to previous workspace
-- `Super + Shift + 1/2/3/4`: Move window to workspace
-- `Super + Arrow`: Move focus to window in direction of arrow
-- `Super + Shift + Arrow`: Swap window with another in direction of arrow
+- [ ] `Super + Space`: Omarchy menu (apps and everything else)
+- [x] `Super + Alt + Space`: Apps menu &rarr; `Fn + Alt + Space` (Spotlight / Launchpad)
+- [ ] `Super + Escape`: System menu (suspend, restart, etc.) *(Testing: `Fn + Escape` for Sleep Display)*
+- [x] `Super + Ctrl + L`: Lock computer &rarr; `Fn + Ctrl + L` (Lock Screen)
+- [x] `Super + W` or `Super + Q`: Close / Quit window &rarr; `Fn + W` (Quit App Under Cursor; see note below on "Close Window")
+- [ ] `Ctrl + Alt + Del`: Close all windows
+- [ ] `Super + T`: Toggle window between tiling/floating
+- [ ] `Super + J`: Toggle window position (horizontal/vertical)
+- [ ] `Super + F`: Go full screen
+- [x] `Super + Alt + F`: Go full width &rarr; `Fn + Alt + F` (macOS Window Tiling: Fill Screen)
+- [x] `Super + 1/2/3/4`: Jump to specific workspace &rarr; `Fn + 1/2/3/4` (Switch to Desktop 1–4)
+- [x] `Super + Tab`: Jump to next workspace &rarr; `Fn + Tab` (Move Right a Space)
+- [x] `Super + Shift + Tab`: Jump to previous workspace &rarr; `Fn + Shift + Tab` (Move Left a Space)
+- [x] `Super + Shift + 1/2/3/4`: Move window to workspace &rarr; `Fn + Shift + 1/2/3` (Move Window to Desktop 1–3)
+- [ ] `Super + Arrow`: Move focus to window in direction of arrow
+- [ ] `Super + Shift + Arrow`: Swap window with another in direction of arrow
 
 ### App Launching
-- `Super + Return`: Terminal
-- `Super + Alt + Return`: Tmux terminal
-- `Super + Ctrl + Return`: Herdr (agent manager)
-- `Super + Shift + Return`: Browser
-- `Super + Shift + F`: File manager
-- `Super + Shift + N`: Editor (Neovim)
-- `Super + Shift + C`: Calendar
-- `Super + Shift + E`: Email
-- `Super + Shift + A`: AI
-- `Super + Shift + /`: Password manager
+- [x] `Super + Return`: Terminal &rarr; `Fn + Return` (Ghostty)
+- [ ] `Super + Alt + Return`: Tmux terminal
+- [x] `Super + Ctrl + Return`: Herdr (agent manager) &rarr; `Fn + Ctrl + Return` (Ghostty + Herdr shim)
+- [x] `Super + Shift + Return`: Browser &rarr; `Fn + Shift + Return` (Safari)
+- [x] `Super + Shift + F`: File manager &rarr; `Fn + Shift + F` (Finder)
+- [x] `Super + Shift + N`: Editor &rarr; `Fn + Shift + N` (Zed)
+- [x] `Super + Shift + C`: Calendar &rarr; `Fn + Shift + C` (Calendar.app)
+- [x] `Super + Shift + E`: Email &rarr; `Fn + Shift + E` (Mail.app)
+- [x] `Super + Ctrl + Q`: Calculator &rarr; `Fn + Ctrl + Q` (Calculator.app)
+- [x] `Super + Shift + /`: Password manager &rarr; `Shift + ⌘ + /` (Bitwarden)
+- [ ] `Super + Shift + A`: AI

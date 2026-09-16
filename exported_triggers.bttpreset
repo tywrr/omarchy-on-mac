@@ -72,7 +72,7 @@
     ]
   },
   {
-    "BTTLastUpdatedAt" : 1789541547.7298899,
+    "BTTLastUpdatedAt" : 1789543383.4986351,
     "BTTTriggerType" : 630,
     "BTTTriggerTypeDescriptionReadOnly" : "Group",
     "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -85,7 +85,7 @@
     "BTTAutoAdaptToKeyboardLayout" : 0,
     "BTTActionsToExecute" : [
       {
-        "BTTLastUpdatedAt" : 1789537496.6272678,
+        "BTTLastUpdatedAt" : 1789543383.4987001,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -113,7 +113,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789537496.62728,
+        "BTTLastUpdatedAt" : 1789543383.498709,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -141,7 +141,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789537496.627213,
+        "BTTLastUpdatedAt" : 1789543383.4986811,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -169,7 +169,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789537496.6272001,
+        "BTTLastUpdatedAt" : 1789543383.4987469,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -199,7 +199,7 @@
         "BTTGestureNotes" : "Open Herdr"
       },
       {
-        "BTTLastUpdatedAt" : 1789537496.6271729,
+        "BTTLastUpdatedAt" : 1789543383.4987569,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -226,7 +226,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789537496.627187,
+        "BTTLastUpdatedAt" : 1789543383.4986901,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -254,7 +254,7 @@
         ]
       },
       {
-        "BTTLastUpdatedAt" : 1789539656.9606709,
+        "BTTLastUpdatedAt" : 1789543383.4987168,
         "BTTTriggerType" : 0,
         "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
         "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
@@ -278,6 +278,89 @@
             "BTTPredefinedActionName" : "Launch Application  or  Open File  or  Start Apple Script …",
             "BTTLaunchPath" : "\/Applications\/Bitwarden.app",
             "BTTOrder" : 23
+          }
+        ]
+      },
+      {
+        "BTTLastUpdatedAt" : 1789543383.4986711,
+        "BTTTriggerType" : 0,
+        "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
+        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+        "BTTUUID" : "DC125BB2-6446-414B-BD46-7EF27F40C792",
+        "BTTAdditionalConfiguration" : "8519682",
+        "BTTShortcutKeyboardType" : -2052004921,
+        "BTTTriggerOnDown" : 1,
+        "BTTLayoutIndependentChar" : "c",
+        "BTTShortcutKeyCode" : 8,
+        "BTTShortcutAdvancedModifierKeys" : "8519682",
+        "BTTShortcutModifierKeys" : 8519680,
+        "BTTOrder" : 7,
+        "BTTAutoAdaptToKeyboardLayout" : 0,
+        "BTTActionsToExecute" : [
+          {
+            "BTTLastUpdatedAt" : 1789543313.4829412,
+            "BTTTriggerParentUUID" : "DC125BB2-6446-414B-BD46-7EF27F40C792",
+            "BTTIsPureAction" : true,
+            "BTTUUID" : "98A9238B-8571-4A31-9A63-7A455F8B856B",
+            "BTTPredefinedActionType" : 49,
+            "BTTPredefinedActionName" : "Launch Application  or  Open File  or  Start Apple Script …",
+            "BTTLaunchPath" : "\/System\/Applications\/Calendar.app",
+            "BTTOrder" : 27
+          }
+        ]
+      },
+      {
+        "BTTLastUpdatedAt" : 1789543383.498662,
+        "BTTTriggerType" : 0,
+        "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
+        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+        "BTTUUID" : "BB0E5FA6-77A9-4EB7-A163-A03E920B5DB5",
+        "BTTAdditionalConfiguration" : "8519682",
+        "BTTShortcutKeyboardType" : -2052004921,
+        "BTTTriggerOnDown" : 1,
+        "BTTLayoutIndependentChar" : "e",
+        "BTTShortcutKeyCode" : 14,
+        "BTTShortcutAdvancedModifierKeys" : "8519682",
+        "BTTShortcutModifierKeys" : 8519680,
+        "BTTOrder" : 8,
+        "BTTAutoAdaptToKeyboardLayout" : 0,
+        "BTTActionsToExecute" : [
+          {
+            "BTTLastUpdatedAt" : 1789543357.396965,
+            "BTTTriggerParentUUID" : "BB0E5FA6-77A9-4EB7-A163-A03E920B5DB5",
+            "BTTIsPureAction" : true,
+            "BTTUUID" : "B7F1CA1A-ED30-4B47-ACD6-D554F5AB2690",
+            "BTTPredefinedActionType" : 49,
+            "BTTPredefinedActionName" : "Launch Application  or  Open File  or  Start Apple Script …",
+            "BTTLaunchPath" : "\/System\/Applications\/Mail.app",
+            "BTTOrder" : 28
+          }
+        ]
+      },
+      {
+        "BTTLastUpdatedAt" : 1789543390.4248729,
+        "BTTTriggerType" : 0,
+        "BTTTriggerParentUUID" : "4C3EF53B-F9E3-4DB4-87A7-F0893821B50C",
+        "BTTTriggerClass" : "BTTTriggerTypeKeyboardShortcut",
+        "BTTUUID" : "29B36A79-3EE6-42A4-A13D-C6A917D4D1AF",
+        "BTTAdditionalConfiguration" : "8650753",
+        "BTTShortcutKeyboardType" : -2052004921,
+        "BTTTriggerOnDown" : 1,
+        "BTTLayoutIndependentChar" : "l",
+        "BTTShortcutKeyCode" : 37,
+        "BTTShortcutAdvancedModifierKeys" : "8650753",
+        "BTTShortcutModifierKeys" : 8650752,
+        "BTTOrder" : 9,
+        "BTTAutoAdaptToKeyboardLayout" : 0,
+        "BTTActionsToExecute" : [
+          {
+            "BTTLastUpdatedAt" : 1789543395.052582,
+            "BTTTriggerParentUUID" : "29B36A79-3EE6-42A4-A13D-C6A917D4D1AF",
+            "BTTIsPureAction" : true,
+            "BTTUUID" : "88BF5AB2-50EF-43E4-90B3-27C77B9D2B23",
+            "BTTPredefinedActionType" : 158,
+            "BTTPredefinedActionName" : "Lock Screen",
+            "BTTOrder" : 29
           }
         ]
       }
