@@ -1,0 +1,9 @@
+{
+  "captured_at_utc": "2026-10-14T19:15:04.427484+00:00",
+  "skhd_config_source": "~/.config/skhd/skhdrc",
+  "preference_domains": [
+    "io.gechr.WhichSpace",
+    "com.apple.symbolichotkeys"
+  ],
+  "scope": "Full preference snapshots; Space/display IDs are machine-specific."
+}
