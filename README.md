@@ -63,6 +63,9 @@ included for the three Return bindings.
 The plain terminal launcher uses `open -na /Applications/Ghostty.app`, creating
 a new instance/window even when Ghostty is already running.
 
+**Trackpad:** a three-finger swipe left or right switches desktops on both
+Omarchy and macOS.
+
 ## How forwarding works
 
 macOS retains its normal **Control+1–5** desktop shortcuts and **Command+Space**
