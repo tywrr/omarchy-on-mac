@@ -1,0 +1,24 @@
+# Live settings snapshots
+
+The initial working snapshot is [2026-10-14T191504Z](2026-10-14T191504Z/).
+Each directory contains the full WhichSpace preference domain, the full native
+symbolic-hotkey preference domain, the active skhd config, and capture metadata.
+
+These full exports preserve machine-specific Space/display IDs and unrelated
+native shortcuts for recovery on the original Mac. Prefer the portable restore
+in the [root README](../README.md) when setting up another Mac: it merges only
+the intended shortcuts and selected menu-bar preferences.
+
+Run `python3 scripts/settings.py backup` from the repository root to create
+another snapshot and refresh the portable configuration. The restore command
+also makes a rollback snapshot before changing live settings. A restore onto a
+Mac with no previous skhd config records `NO_PREVIOUS_SKHDRC` instead.
+
+Privacy permissions, login-item approvals, installed applications, and the
+creation of Mission Control desktops are outside these preference exports.
+
+For full preference recovery on the same Mac, quit WhichSpace, import the two
+saved domains with `defaults import <domain> <snapshot-file>`, restore the saved
+`skhdrc` to `~/.config/skhd/skhdrc`, then relaunch WhichSpace and reload skhd/native
+settings. Full imports replace the domain, so use them only when you want that
+entire snapshot; take another backup first.
