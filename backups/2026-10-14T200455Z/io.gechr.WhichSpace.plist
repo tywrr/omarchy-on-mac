@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KeyboardShortcuts_moveToSpace1</key>
+	<string>{"carbonModifiers":131584,"carbonKeyCode":18}</string>
+	<key>KeyboardShortcuts_moveToSpace2</key>
+	<string>{"carbonModifiers":131584,"carbonKeyCode":19}</string>
+	<key>KeyboardShortcuts_moveToSpace3</key>
+	<string>{"carbonModifiers":131584,"carbonKeyCode":20}</string>
+	<key>KeyboardShortcuts_moveToSpace4</key>
+	<string>{"carbonModifiers":131584,"carbonKeyCode":21}</string>
+	<key>KeyboardShortcuts_moveToSpace5</key>
+	<string>{"carbonModifiers":131584,"carbonKeyCode":23}</string>
+	<key>NSWindow Frame com.sindresorhus.Settings.FrameAutosaveName</key>
+	<string>585 245 540 699 0 0 1710 1073 </string>
+	<key>SUHasLaunchedBefore</key>
+	<true/>
+	<key>SULastCheckTime</key>
+	<date>2026-10-14T17:53:10Z</date>
+	<key>SUUpdateGroupIdentifier</key>
+	<integer>2932176795</integer>
+	<key>clickToSwitchSpaces</key>
+	<true/>
+	<key>hideEmptySpaces</key>
+	<true/>
+	<key>showAllSpaces</key>
+	<true/>
+	<key>spaceOrders</key>
+	<dict>
+		<key>37D8832A-2D66-02CA-B9F7-8F30A301B230</key>
+		<array>
+			<string>id:1</string>
+			<string>78C91DF0-9C4D-4AE9-8F8B-ECCDD6A67F8B</string>
+			<string>490A91B2-5DB8-4AD5-9460-77DCFD59EA98</string>
+			<string>739D8986-81A6-4E47-A84E-339CEF4D8630</string>
+			<string>D66AC3A4-F77F-4207-AE19-DB6B4C78622C</string>
+		</array>
+	</dict>
+	<key>spaceStyleMigrationVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -7,6 +7,8 @@ and unresolved questions in them may predate the subsequent working setup.
 
 ## Working configuration
 
+- [Native Fill toggle](2026-10-14-native-fill-toggle.md): Fn+Option+F;
+  skhd plus a compiled native helper, verified with synthetic presses in Finder and Chrome.
 - [skhd app launches](2026-10-14-skhd-app-launches.md): six launch actions;
   synthetic events verified, physical-key confirmation pending.
 - [Native Fn desktop switching](2026-10-14-native-fn-desktop-test.md): Fn+1–5;

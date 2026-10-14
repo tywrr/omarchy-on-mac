@@ -1,4 +1,4 @@
-# Omarchy-style app launches. Super is the physical Fn/Globe key.
+# Omarchy-style hotkeys. Super is the physical Fn/Globe key.
 # Native Fn+1-5 and WhichSpace Fn+Shift+1-5 remain configured separately.
 
 # Calculator
@@ -18,6 +18,9 @@ fn + shift + alt - b : /usr/bin/open -na "/Applications/Google Chrome.app" --arg
 
 # File manager (Finder)
 fn + shift - f : /usr/bin/open -b com.apple.finder
+
+# Toggle native Fill / Return to Previous Size
+fn + alt - f : "$HOME/.config/skhd/toggle-fill"
 
 # Apple keyboards can translate Fn+Return to keypad Enter (keycode 0x4c).
 fn - 0x4c : /usr/bin/open -b com.mitchellh.ghostty
