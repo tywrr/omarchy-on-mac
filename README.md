@@ -160,6 +160,39 @@ also refreshes the portable configs. The compiled helper is rebuilt rather than
 committed. Full WhichSpace snapshots include machine-specific Space/display IDs;
 its portable file excludes those values.
 
+## Transfer updates to the personal repo
+
+Use one incremental package against the actual published `origin/main`, rather
+than choosing between generic "latest" and "complete" patches:
+
+```sh
+python3 scripts/export_update.py
+```
+
+Commit the source changes first. The exporter fetches public `origin/main`,
+excludes commits whose patches have already been published (even if `git am`
+changed their hashes), and applies the remaining commits to that exact base in
+an isolated checkout. It then exports and test-applies the full series, including
+binary PDF/font files, in another clean checkout. Conflicts stop the export.
+The active branch and live macOS settings are not changed.
+
+Downloads receives a patch and a ZIP named with the published base and source
+commit. Transfer the ZIP and extract it outside your personal checkout. If a
+previous `git am` failed, first run `git am --abort` in that checkout. Then:
+
+```sh
+cd /path/to/personal/omarchy-on-mac
+python3 /path/to/extracted/apply-update.py --check
+python3 /path/to/extracted/apply-update.py
+```
+
+The packaged helper checks for pending Git operations, uncommitted files, the
+required base tree, and a matching patch checksum before applying. It verifies
+the final tree afterward. A repeated application is detected without changing
+files. A different destination state stops with an explanation; publish that
+state and export again rather than forcing the patch. This transfers repo files
+only; settings are applied separately with `scripts/settings.py restore`.
+
 ## Where to edit the settings
 
 - **Fn bindings:** `~/.config/skhd/skhdrc`, then `skhd --reload`.
