@@ -30,7 +30,7 @@ DISPLAY, LABEL, SYMBOL, MONO = (
 # The Fn modifier is supplied by the banner for every displayed chord.
 CARDS = [
     ("TERMINAL + TOOLS", PURPLE, [
-        ("RET", "Ghostty", "fn - return"),
+        ("RET", "New Ghostty window", "fn - return"),
         ("⌃ RET", "Herdr / new terminal", "fn + ctrl - return"),
         ("⇧ N", "Neovim / new terminal", "fn + shift - n"),
         ("⌃ Q", "Calculator", "fn + ctrl - q"),

@@ -44,6 +44,7 @@ explicitly described as physical keyboard confirmation.
 | Fill/restore | User confirmed Finder, Chrome, Calendar, and Ghostty. Earlier automated checks passed in Finder and Chrome. |
 | App targets | Installed app IDs and paths, including the mise Neovim shim, were checked. Calendar, Mail, and 1Password were not opened solely for inspection. |
 | Share / LocalSend | Fn+Control+S invoked the launch command successfully and LocalSend became frontmost. Bundle ID `org.localsend.localsendApp`, installed version 1.18.2. No transfer was started. |
+| New terminal window | Fn+Return and its keypad-Enter variant each created one additional Ghostty window. The two new test windows were closed; the existing window was preserved. Uses `open -na /Applications/Ghostty.app` to create a new instance/window on every press. |
 
 An earlier full-screen assertion against Finder's front window failed; its exact
 cause was not isolated. The final check used AXFocusedWindow after activation
