@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>KeyboardShortcuts_moveToSpace1</key>
-	<string>{"carbonModifiers":131584,"carbonKeyCode":18}</string>
+	<string>{"carbonModifiers":4608,"carbonKeyCode":18}</string>
 	<key>KeyboardShortcuts_moveToSpace2</key>
-	<string>{"carbonModifiers":131584,"carbonKeyCode":19}</string>
+	<string>{"carbonModifiers":4608,"carbonKeyCode":19}</string>
 	<key>KeyboardShortcuts_moveToSpace3</key>
-	<string>{"carbonModifiers":131584,"carbonKeyCode":20}</string>
+	<string>{"carbonModifiers":4608,"carbonKeyCode":20}</string>
 	<key>KeyboardShortcuts_moveToSpace4</key>
-	<string>{"carbonModifiers":131584,"carbonKeyCode":21}</string>
+	<string>{"carbonModifiers":4608,"carbonKeyCode":21}</string>
 	<key>KeyboardShortcuts_moveToSpace5</key>
-	<string>{"carbonModifiers":131584,"carbonKeyCode":23}</string>
+	<string>{"carbonModifiers":4608,"carbonKeyCode":23}</string>
 	<key>clickToSwitchSpaces</key>
 	<true/>
 	<key>hideEmptySpaces</key>

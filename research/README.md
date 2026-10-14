@@ -7,14 +7,16 @@ and unresolved questions in them may predate the subsequent working setup.
 
 ## Working configuration
 
+- [Central skhd routing](2026-10-14-central-skhd-routing.md): current Fn map;
+  native Control+1–5, WhichSpace Control+Shift+1–5, clipboard, and system actions.
 - [Native Fill toggle](2026-10-14-native-fill-toggle.md): Fn+Option+F;
   skhd plus a compiled native helper, verified with synthetic presses in Finder and Chrome.
 - [skhd app launches](2026-10-14-skhd-app-launches.md): six launch actions;
   synthetic events verified, physical-key confirmation pending.
-- [Native Fn desktop switching](2026-10-14-native-fn-desktop-test.md): Fn+1–5;
-  physical Fn+1/Fn+2 confirmed.
-- [WhichSpace window moves](2026-10-14-whichspace-fn-move-test.md): Fn+Shift+1–5;
-  physical Fn+Shift+1/Fn+Shift+2 confirmed.
+- [Native Fn desktop switching](2026-10-14-native-fn-desktop-test.md): earlier
+  direct native configuration; Fn routing has since moved into skhd.
+- [WhichSpace window moves](2026-10-14-whichspace-fn-move-test.md): earlier direct
+  Fn configuration; skhd now forwards to ordinary WhichSpace shortcuts.
 
 The small directories alongside these reports preserve their pre-change trial
 preferences. The separate [backups](../backups/) directory contains the full

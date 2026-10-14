@@ -1,5 +1,5 @@
-// Toggle native Fill without keeping our own window-position history.
-// Requires an English Window menu and Accessibility access for the caller.
+// Native Fill, full-screen, Apple menu, and new Finder window actions.
+// Requires English app menu titles and Accessibility access for the caller.
 import AppKit
 import ApplicationServices
 
@@ -74,8 +74,53 @@ func toggleFill() throws {
     }
 }
 
+func toggleFullScreen() throws {
+    guard let app = NSWorkspace.shared.frontmostApplication else { return }
+    let process = AXUIElementCreateApplication(app.processIdentifier)
+    let window = try attribute(process, kAXFocusedWindowAttribute) as! AXUIElement
+    let isFullScreen = try attribute(window, "AXFullScreen") as! Bool
+    let result = AXUIElementSetAttributeValue(
+        window, "AXFullScreen" as CFString,
+        isFullScreen ? kCFBooleanFalse : kCFBooleanTrue
+    )
+    guard result == .success else {
+        throw Failure(description: "Cannot toggle native full screen: \(result.rawValue)")
+    }
+}
+
+func newFinderWindow() throws {
+    guard let finder = NSRunningApplication.runningApplications(withBundleIdentifier: "com.apple.finder").first else {
+        throw Failure(description: "Finder is not running")
+    }
+    let process = AXUIElementCreateApplication(finder.processIdentifier)
+    let menuBar = try attribute(process, kAXMenuBarAttribute) as! AXUIElement
+    let fileItem = try child(menuBar, titled: "File")
+    let newWindow = try child(child(fileItem), titled: "New Finder Window")
+    try press(newWindow)
+    finder.activate(options: [])
+}
+
+func showAppleMenu() throws {
+    guard let app = NSWorkspace.shared.frontmostApplication else { return }
+    let process = AXUIElementCreateApplication(app.processIdentifier)
+    let menuBar = try attribute(process, kAXMenuBarAttribute) as! AXUIElement
+    // macOS puts the Apple menu first, independently of the app or language.
+    try press(child(menuBar))
+}
+
 do {
-    try toggleFill()
+    switch CommandLine.arguments.dropFirst().first {
+    case "--apple-menu":
+        try showAppleMenu()
+    case "--new-finder-window":
+        try newFinderWindow()
+    case "--fullscreen":
+        try toggleFullScreen()
+    case nil:
+        try toggleFill()
+    default:
+        throw Failure(description: "Unknown native helper action")
+    }
 } catch {
     FileHandle.standardError.write(Data("toggle-fill: \(error)\n".utf8))
     exit(1)

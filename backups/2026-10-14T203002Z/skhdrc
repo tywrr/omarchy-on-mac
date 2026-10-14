@@ -1,0 +1,53 @@
+# Omarchy-style hotkeys. Super is the physical Fn/Globe key.
+# Fn routing lives here. Apps/macOS retain ordinary, recordable shortcuts.
+
+# Native desktops (macOS: Control+1-5)
+fn - 1 | ctrl - 1
+fn - 2 | ctrl - 2
+fn - 3 | ctrl - 3
+fn - 4 | ctrl - 4
+fn - 5 | ctrl - 5
+
+# Move the focused window and follow it (WhichSpace: Control+Shift+1-5)
+fn + shift - 1 | ctrl + shift - 1
+fn + shift - 2 | ctrl + shift - 2
+fn + shift - 3 | ctrl + shift - 3
+fn + shift - 4 | ctrl + shift - 4
+fn + shift - 5 | ctrl + shift - 5
+
+# Spotlight and quit the active app (native macOS shortcuts)
+fn - space | cmd - space
+fn - w | cmd - q
+fn - f | ctrl + cmd - f
+
+# Open the Apple menu (Sleep, Restart, Shut Down, ...).
+fn - escape : "$HOME/.config/skhd/toggle-fill" --apple-menu
+
+# Calculator
+fn + ctrl - q : /usr/bin/open -b com.apple.calculator
+
+# Clipboard history: forward to Vorssaint's standard non-Fn shortcut.
+fn + ctrl - v | ctrl + alt + cmd - v
+
+# Terminal (Ghostty)
+fn - return : /usr/bin/open -b com.mitchellh.ghostty
+
+# Herdr in a new Ghostty instance (existing BTT launch command)
+fn + ctrl - return : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"
+
+# Browser (Google Chrome)
+fn + shift - return : /usr/bin/open -b com.google.Chrome
+
+# New Chrome incognito window, including when Chrome is already running
+fn + shift + alt - b : /usr/bin/open -na "/Applications/Google Chrome.app" --args --incognito --new-window
+
+# File manager: always create a new Finder window.
+fn + shift - f : /usr/bin/osascript -e 'tell application "Finder" to make new Finder window' -e 'tell application "Finder" to activate'
+
+# Toggle native Fill / Return to Previous Size
+fn + alt - f : "$HOME/.config/skhd/toggle-fill"
+
+# Apple keyboards can translate Fn+Return to keypad Enter (keycode 0x4c).
+fn - 0x4c : /usr/bin/open -b com.mitchellh.ghostty
+fn + ctrl - 0x4c : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"
+fn + shift - 0x4c : /usr/bin/open -b com.google.Chrome

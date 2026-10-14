@@ -1,0 +1,28 @@
+# Omarchy-style hotkeys. Super is the physical Fn/Globe key.
+# Native Fn+1-5 and WhichSpace Fn+Shift+1-5 remain configured separately.
+
+# Calculator
+fn + ctrl - q : /usr/bin/open -b com.apple.calculator
+
+# Terminal (Ghostty)
+fn - return : /usr/bin/open -b com.mitchellh.ghostty
+
+# Herdr in a new Ghostty instance (existing BTT launch command)
+fn + ctrl - return : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"
+
+# Browser (Google Chrome)
+fn + shift - return : /usr/bin/open -b com.google.Chrome
+
+# New Chrome incognito window, including when Chrome is already running
+fn + shift + alt - b : /usr/bin/open -na "/Applications/Google Chrome.app" --args --incognito --new-window
+
+# File manager (Finder)
+fn + shift - f : /usr/bin/open -b com.apple.finder
+
+# Toggle native Fill / Return to Previous Size
+fn + alt - f : "$HOME/.config/skhd/toggle-fill"
+
+# Apple keyboards can translate Fn+Return to keypad Enter (keycode 0x4c).
+fn - 0x4c : /usr/bin/open -b com.mitchellh.ghostty
+fn + ctrl - 0x4c : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/herdr"
+fn + shift - 0x4c : /usr/bin/open -b com.google.Chrome
