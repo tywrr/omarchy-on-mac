@@ -34,7 +34,7 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 
 | Shortcut | Action | Target |
 |---|---|---|
-| Super + Return | Open/focus Ghostty | App launch |
+| Super + Return | Open a new Ghostty terminal window on every press | App launch |
 | Super + Control + Return | Start Herdr in a new Ghostty instance | App launch |
 | Super + Shift + Return | Open/focus Chrome | App launch |
 | Super + Shift + Option + B | New Chrome incognito window | App launch |
@@ -60,6 +60,8 @@ Fn+W quits the application, as requested; Command+W remains the ordinary close-w
 shortcut. A Caps Lock key already remapped to Escape should also trigger Fn+Escape.
 Apple keyboards can turn Fn+Return into keypad Enter, so both Return keycodes are
 included for the three Return bindings.
+The plain terminal launcher uses `open -na /Applications/Ghostty.app`, creating
+a new instance/window even when Ghostty is already running.
 
 ## How forwarding works
 
