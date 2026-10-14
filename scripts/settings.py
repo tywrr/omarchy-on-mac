@@ -20,6 +20,13 @@ LIVE_HELPER = LIVE_SKHD.parent / HELPER_NAME
 LIVE_HELPER_BINARY = LIVE_SKHD.parent / "toggle-fill"
 WHICHSPACE = "io.gechr.WhichSpace"
 SYMBOLIC = "com.apple.symbolichotkeys"
+VORSSAINT = "com.vorssaint.utils"
+VORSSAINT_KEYS = {
+    "featureAvailable.clipboardHistory": True,
+    "clipboardHistoryEnabled": True,
+    "clipboardHistoryShortcutEnabled": True,
+    "clipboardHistoryShortcut": "control+option+command:9",
+}
 DESKTOP_IDS = tuple(str(value) for value in range(118, 123))
 # Deliberately omit Space/display UUIDs, window positions, and updater state.
 APPEARANCE_KEYS = {"clickToSwitchSpaces", "hideEmptySpaces", "showAllSpaces"}
@@ -52,11 +59,36 @@ def import_preferences(domain, value):
         run(["/usr/bin/defaults", "import", domain, str(path)])
 
 
+def clipboard_preferences():
+    # Never save the complete domain: it can contain legacy clipboard history.
+    preferences = export_preferences(VORSSAINT)
+    return {key: preferences[key] for key in VORSSAINT_KEYS if key in preferences}
+
+
+def stop_app_if_running(process_name, bundle_id):
+    result = subprocess.run(["/usr/bin/pgrep", "-x", process_name], capture_output=True)
+    if result.returncode == 1:
+        return False
+    if result.returncode != 0:
+        raise RuntimeError(f"Could not determine whether {process_name} is running")
+    run([
+        "/usr/bin/osascript", "-e",
+        f'with timeout of 5 seconds\ntell application id "{bundle_id}" to quit\nend timeout',
+    ], timeout=8)
+    deadline = time.monotonic() + 3
+    while subprocess.run(["/usr/bin/pgrep", "-x", process_name], capture_output=True).returncode == 0:
+        if time.monotonic() >= deadline:
+            raise RuntimeError(f"{process_name} did not exit; settings were not imported")
+        time.sleep(0.1)
+    return True
+
+
 def snapshot(output=None, refresh=False):
     stamp = datetime.datetime.now(datetime.timezone.utc)
     directory = output or ROOT / "backups" / stamp.strftime("%Y-%m-%dT%H%M%SZ")
     whichspace = export_preferences(WHICHSPACE)
     symbolic = export_preferences(SYMBOLIC)
+    vorssaint = clipboard_preferences()
     skhd = LIVE_SKHD.read_bytes() if LIVE_SKHD.exists() else None
     helper = LIVE_HELPER.read_bytes() if LIVE_HELPER.exists() else None
     native_hotkeys = symbolic.get("AppleSymbolicHotKeys", {})
@@ -71,6 +103,7 @@ def snapshot(output=None, refresh=False):
     directory.mkdir(parents=True, exist_ok=False)
     save_plist(directory / f"{WHICHSPACE}.plist", whichspace)
     save_plist(directory / f"{SYMBOLIC}.plist", symbolic)
+    save_plist(directory / f"{VORSSAINT}.clipboard-shortcuts.plist", vorssaint)
     if skhd is None:
         (directory / "NO_PREVIOUS_SKHDRC").touch()
     else:
@@ -88,6 +121,9 @@ def snapshot(output=None, refresh=False):
                 "fill_helper_source": f"~/.config/skhd/{HELPER_NAME}",
                 "fill_helper_present": helper is not None,
                 "preference_domains": [WHICHSPACE, SYMBOLIC],
+                "vorssaint_shortcut_keys": list(VORSSAINT_KEYS),
+                "vorssaint_keys_absent": [key for key in VORSSAINT_KEYS if key not in vorssaint],
+                "vorssaint_scope": "Clipboard shortcut configuration only; no history or content.",
                 "scope": "Full preference snapshots; Space/display IDs are machine-specific.",
             },
             indent=2,
@@ -104,21 +140,29 @@ def snapshot(output=None, refresh=False):
             if key.startswith("KeyboardShortcuts_") or key in APPEARANCE_KEYS
         }
         save_plist(ROOT / "whichspace/settings.plist", portable_whichspace)
+        save_plist(ROOT / "vorssaint/settings.plist", {
+            key: vorssaint.get(key, default) for key, default in VORSSAINT_KEYS.items()
+        })
         save_plist(
-            ROOT / "macos/fn-desktops.plist",
+            ROOT / "macos/desktop-shortcuts.plist",
             {"AppleSymbolicHotKeys": {key: native_hotkeys[key] for key in DESKTOP_IDS}},
         )
     print(f"Backup: {directory}")
     if refresh:
-        print("Refreshed skhd config/helper, whichspace/settings.plist, macos/fn-desktops.plist")
+        print("Refreshed skhd config/helper, WhichSpace, Vorssaint shortcuts, and native desktops")
     return directory
 
 
 def load_portable_settings():
     whichspace = plistlib.loads((ROOT / "whichspace/settings.plist").read_bytes())
-    symbolic = plistlib.loads((ROOT / "macos/fn-desktops.plist").read_bytes())
+    symbolic = plistlib.loads((ROOT / "macos/desktop-shortcuts.plist").read_bytes())
     skhd = (ROOT / "skhd/skhdrc").read_bytes()
     helper = (ROOT / "skhd" / HELPER_NAME).read_bytes()
+    vorssaint = plistlib.loads((ROOT / "vorssaint/settings.plist").read_bytes())
+    if not isinstance(vorssaint, dict) or set(vorssaint) != set(VORSSAINT_KEYS) or any(
+        type(vorssaint[key]) is not type(default) for key, default in VORSSAINT_KEYS.items()
+    ):
+        raise ValueError("Vorssaint settings must contain only the four clipboard shortcut keys")
     if not isinstance(whichspace, dict) or any(
         not key.startswith("KeyboardShortcuts_") and key not in APPEARANCE_KEYS
         for key in whichspace
@@ -131,13 +175,17 @@ def load_portable_settings():
         raise ValueError("Repository skhd config is empty")
     if not helper.strip():
         raise ValueError("Repository Fill helper is empty")
-    return whichspace, hotkeys, skhd, helper
+    return whichspace, hotkeys, skhd, helper, vorssaint
 
 
 def restore(dry_run):
-    desired_whichspace, desired_hotkeys, desired_skhd, desired_helper = load_portable_settings()
+    desired_whichspace, desired_hotkeys, desired_skhd, desired_helper, desired_vorssaint = load_portable_settings()
     current_whichspace = export_preferences(WHICHSPACE)
     current_symbolic = export_preferences(SYMBOLIC)
+    current_vorssaint = clipboard_preferences()
+    vorssaint_changes = [
+        key for key, value in desired_vorssaint.items() if current_vorssaint.get(key) != value
+    ]
     current_hotkeys = current_symbolic.get("AppleSymbolicHotKeys", {})
     whichspace_changes = [
         key for key, value in desired_whichspace.items() if current_whichspace.get(key) != value
@@ -153,6 +201,7 @@ def restore(dry_run):
     print(f"skhd config differs: {config_changes}")
     print(f"Fill helper differs: {helper_changes}")
     print(f"WhichSpace keys to change: {whichspace_changes}")
+    print(f"Vorssaint clipboard shortcut keys to change: {vorssaint_changes}")
     print(f"Native desktop shortcut IDs to change: {native_changes}")
     print("Other native hotkeys and WhichSpace's machine-specific preferences are preserved.")
     if dry_run:
@@ -165,39 +214,24 @@ def restore(dry_run):
     # Compile before changing preferences. The binary is derived from the saved
     # source; only the source is portable and tracked in git.
     LIVE_SKHD.parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="omarchy-fill-build-") as directory:
-        source = Path(directory) / HELPER_NAME
-        binary = Path(directory) / "toggle-fill"
-        source.write_bytes(desired_helper)
-        try:
-            run(["/usr/bin/xcrun", "swiftc", "-O", str(source), "-o", str(binary)])
-        except subprocess.CalledProcessError as error:
-            raise RuntimeError(error.stderr.decode().strip()) from error
-        binary.replace(LIVE_HELPER_BINARY)
+    if helper_changes:
+        with tempfile.TemporaryDirectory(prefix="omarchy-fill-build-") as directory:
+            source = Path(directory) / HELPER_NAME
+            binary = Path(directory) / "toggle-fill"
+            source.write_bytes(desired_helper)
+            try:
+                run(["/usr/bin/xcrun", "swiftc", "-O", str(source), "-o", str(binary)])
+            except subprocess.CalledProcessError as error:
+                raise RuntimeError(error.stderr.decode().strip()) from error
+            binary.replace(LIVE_HELPER_BINARY)
 
-    running = subprocess.run(
-        ["/usr/bin/pgrep", "-x", "WhichSpace"], capture_output=True
-    )
-    if running.returncode not in (0, 1):
-        raise RuntimeError("Could not determine whether WhichSpace is running")
-    was_running = running.returncode == 0
-    if was_running:
-        run(
-            [
-                "/usr/bin/osascript", "-e",
-                'with timeout of 5 seconds\n'
-                'tell application id "io.gechr.WhichSpace" to quit\n'
-                'end timeout',
-            ],
-            timeout=8,
-        )
-        deadline = time.monotonic() + 3
-        while subprocess.run(["/usr/bin/pgrep", "-x", "WhichSpace"], capture_output=True).returncode == 0:
-            if time.monotonic() >= deadline:
-                raise RuntimeError("WhichSpace did not exit; settings were not imported")
-            time.sleep(0.1)
-
+    was_running = False
+    vorssaint_was_running = False
     try:
+        if whichspace_changes:
+            was_running = stop_app_if_running("WhichSpace", WHICHSPACE)
+        if vorssaint_changes:
+            vorssaint_was_running = stop_app_if_running("Vorssaint", VORSSAINT)
         # Read again after quitting so any settings saved on exit are retained.
         merged_whichspace = export_preferences(WHICHSPACE)
         merged_whichspace.update(desired_whichspace)
@@ -205,6 +239,11 @@ def restore(dry_run):
         merged_symbolic.setdefault("AppleSymbolicHotKeys", {}).update(desired_hotkeys)
         import_preferences(WHICHSPACE, merged_whichspace)
         import_preferences(SYMBOLIC, merged_symbolic)
+        for key in vorssaint_changes:
+            value = desired_vorssaint[key]
+            flag = "-bool" if isinstance(value, bool) else "-string"
+            text = str(value).lower() if isinstance(value, bool) else value
+            run(["/usr/bin/defaults", "write", VORSSAINT, key, flag, text])
         LIVE_SKHD.parent.mkdir(parents=True, exist_ok=True)
         LIVE_SKHD.write_bytes(desired_skhd)
         LIVE_HELPER.write_bytes(desired_helper)
@@ -215,6 +254,8 @@ def restore(dry_run):
     finally:
         if was_running:
             run(["/usr/bin/open", "-a", "WhichSpace"])
+        if vorssaint_was_running:
+            run(["/usr/bin/open", "-b", VORSSAINT])
 
     skhd_binary = shutil.which("skhd")
     if skhd_binary:
