@@ -15,6 +15,9 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 LIVE_SKHD = Path.home() / ".config/skhd/skhdrc"
+HELPER_NAME = "toggle-fill.swift"
+LIVE_HELPER = LIVE_SKHD.parent / HELPER_NAME
+LIVE_HELPER_BINARY = LIVE_SKHD.parent / "toggle-fill"
 WHICHSPACE = "io.gechr.WhichSpace"
 SYMBOLIC = "com.apple.symbolichotkeys"
 DESKTOP_IDS = tuple(str(value) for value in range(118, 123))
@@ -55,10 +58,13 @@ def snapshot(output=None, refresh=False):
     whichspace = export_preferences(WHICHSPACE)
     symbolic = export_preferences(SYMBOLIC)
     skhd = LIVE_SKHD.read_bytes() if LIVE_SKHD.exists() else None
+    helper = LIVE_HELPER.read_bytes() if LIVE_HELPER.exists() else None
     native_hotkeys = symbolic.get("AppleSymbolicHotKeys", {})
     if refresh:
         if skhd is None:
             raise RuntimeError(f"No live skhd config at {LIVE_SKHD}")
+        if helper is None:
+            raise RuntimeError(f"No live Fill helper at {LIVE_HELPER}")
         missing = [key for key in DESKTOP_IDS if key not in native_hotkeys]
         if missing:
             raise RuntimeError(f"Desktop shortcut IDs missing: {', '.join(missing)}")
@@ -69,12 +75,18 @@ def snapshot(output=None, refresh=False):
         (directory / "NO_PREVIOUS_SKHDRC").touch()
     else:
         (directory / "skhdrc").write_bytes(skhd)
+    if helper is None:
+        (directory / "NO_PREVIOUS_FILL_HELPER").touch()
+    else:
+        (directory / HELPER_NAME).write_bytes(helper)
     (directory / "manifest.json").write_text(
         json.dumps(
             {
                 "captured_at_utc": stamp.isoformat(),
                 "skhd_config_source": "~/.config/skhd/skhdrc",
                 "skhd_config_present": skhd is not None,
+                "fill_helper_source": f"~/.config/skhd/{HELPER_NAME}",
+                "fill_helper_present": helper is not None,
                 "preference_domains": [WHICHSPACE, SYMBOLIC],
                 "scope": "Full preference snapshots; Space/display IDs are machine-specific.",
             },
@@ -85,6 +97,7 @@ def snapshot(output=None, refresh=False):
     if refresh:
         (ROOT / "skhd").mkdir(exist_ok=True)
         (ROOT / "skhd/skhdrc").write_bytes(skhd)
+        (ROOT / "skhd" / HELPER_NAME).write_bytes(helper)
         portable_whichspace = {
             key: value
             for key, value in whichspace.items()
@@ -97,7 +110,7 @@ def snapshot(output=None, refresh=False):
         )
     print(f"Backup: {directory}")
     if refresh:
-        print("Refreshed skhd/skhdrc, whichspace/settings.plist, macos/fn-desktops.plist")
+        print("Refreshed skhd config/helper, whichspace/settings.plist, macos/fn-desktops.plist")
     return directory
 
 
@@ -105,6 +118,7 @@ def load_portable_settings():
     whichspace = plistlib.loads((ROOT / "whichspace/settings.plist").read_bytes())
     symbolic = plistlib.loads((ROOT / "macos/fn-desktops.plist").read_bytes())
     skhd = (ROOT / "skhd/skhdrc").read_bytes()
+    helper = (ROOT / "skhd" / HELPER_NAME).read_bytes()
     if not isinstance(whichspace, dict) or any(
         not key.startswith("KeyboardShortcuts_") and key not in APPEARANCE_KEYS
         for key in whichspace
@@ -115,11 +129,13 @@ def load_portable_settings():
         raise ValueError("Native settings must contain only desktop shortcut IDs 118–122")
     if not skhd.strip():
         raise ValueError("Repository skhd config is empty")
-    return whichspace, hotkeys, skhd
+    if not helper.strip():
+        raise ValueError("Repository Fill helper is empty")
+    return whichspace, hotkeys, skhd, helper
 
 
 def restore(dry_run):
-    desired_whichspace, desired_hotkeys, desired_skhd = load_portable_settings()
+    desired_whichspace, desired_hotkeys, desired_skhd, desired_helper = load_portable_settings()
     current_whichspace = export_preferences(WHICHSPACE)
     current_symbolic = export_preferences(SYMBOLIC)
     current_hotkeys = current_symbolic.get("AppleSymbolicHotKeys", {})
@@ -130,7 +146,12 @@ def restore(dry_run):
         key for key, value in desired_hotkeys.items() if current_hotkeys.get(key) != value
     ]
     config_changes = not LIVE_SKHD.exists() or LIVE_SKHD.read_bytes() != desired_skhd
+    helper_changes = (
+        not LIVE_HELPER.exists() or LIVE_HELPER.read_bytes() != desired_helper
+        or not LIVE_HELPER_BINARY.exists()
+    )
     print(f"skhd config differs: {config_changes}")
+    print(f"Fill helper differs: {helper_changes}")
     print(f"WhichSpace keys to change: {whichspace_changes}")
     print(f"Native desktop shortcut IDs to change: {native_changes}")
     print("Other native hotkeys and WhichSpace's machine-specific preferences are preserved.")
@@ -140,6 +161,19 @@ def restore(dry_run):
 
     # Preserve the entire previous state, including an absent skhd config.
     snapshot()
+
+    # Compile before changing preferences. The binary is derived from the saved
+    # source; only the source is portable and tracked in git.
+    LIVE_SKHD.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="omarchy-fill-build-") as directory:
+        source = Path(directory) / HELPER_NAME
+        binary = Path(directory) / "toggle-fill"
+        source.write_bytes(desired_helper)
+        try:
+            run(["/usr/bin/xcrun", "swiftc", "-O", str(source), "-o", str(binary)])
+        except subprocess.CalledProcessError as error:
+            raise RuntimeError(error.stderr.decode().strip()) from error
+        binary.replace(LIVE_HELPER_BINARY)
 
     running = subprocess.run(
         ["/usr/bin/pgrep", "-x", "WhichSpace"], capture_output=True
@@ -173,6 +207,7 @@ def restore(dry_run):
         import_preferences(SYMBOLIC, merged_symbolic)
         LIVE_SKHD.parent.mkdir(parents=True, exist_ok=True)
         LIVE_SKHD.write_bytes(desired_skhd)
+        LIVE_HELPER.write_bytes(desired_helper)
         run([
             "/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings",
             "-u",

@@ -1,7 +1,7 @@
 # Omarchy on Mac
 
 An [Omarchy](https://github.com/omacom/omarchy)-inspired keyboard workflow using
-**Fn/Globe as Super**, **skhd.zig** for app launches, **WhichSpace** for window
+**Fn/Globe as Super**, **skhd.zig** for app launches and native window actions, **WhichSpace** for window
 moves and a desktop indicator, and **native macOS Mission Control desktops**.
 
 Fn stays a real modifier. Shift, Control, and Option remain separate layers;
@@ -12,7 +12,7 @@ Hyper or Right Option.
 
 | Component | Responsibility | Version used for this snapshot |
 |---|---|---|
-| [skhd.zig](https://github.com/jackielii/skhd.zig) | Global Fn app-launch hotkeys | 0.2.0-7e95d99 (fast) |
+| [skhd.zig](https://github.com/jackielii/skhd.zig) | Global Fn hotkeys | 0.2.0-7e95d99 (fast) |
 | [WhichSpace](https://github.com/gechr/WhichSpace) | Menu-bar desktop indicator and moving windows to numbered desktops | 1.4.1 |
 | Native macOS | Mission Control desktops, numbered desktop switching, built-in window tiling | 26.7.1 |
 | Herdr | Agent manager launched in Ghostty; optional for other bindings | Existing mise shim |
@@ -33,6 +33,7 @@ BetterTouchTool presets are preserved under [legacy/bettertouchtool](legacy/bett
 | Super + Shift + Option + B | Open a new Chrome incognito window | skhd.zig |
 | Super + Shift + F | Open/focus Finder | skhd.zig |
 | Super + Control + Q | Open/focus Calculator | skhd.zig |
+| Super + Option + F | Toggle native Fill / Return to Previous Size | skhd.zig + native Accessibility helper |
 | Super + 1–5 | Switch to native Desktop 1–5 | macOS |
 | Super + Shift + 1–5 | Move the focused window to Desktop 1–5 and follow it | WhichSpace |
 
@@ -45,11 +46,21 @@ Apple keyboards can turn Fn+Return into keypad Enter. The
 [skhd config](skhd/skhdrc) includes both key variants for the three Return bindings.
 Repeated Herdr and incognito shortcuts request new instances/windows.
 
+The Fill toggle invokes the app's native **Window → Fill** command. If the
+window is already filled, it invokes **Window → Move & Resize → Return to
+Previous Size**. macOS keeps the size history. The small compiled helper uses
+Accessibility directly, with no extra background process or window manager.
+It currently requires English menu titles and an app that exposes these native
+commands. Full-screen windows and nonstandard windows are ignored.
+The user confirmed the toggle in Finder, Chrome, Calendar, and Ghostty.
+See [Fill verification notes](research/2026-10-14-native-fill-toggle.md).
+
 ## Files
 
 | Path | Contents |
 |---|---|
-| [skhd/skhdrc](skhd/skhdrc) | Working app-launch config; copied to `~/.config/skhd/skhdrc` |
+| [skhd/skhdrc](skhd/skhdrc) | Working hotkey config; copied to `~/.config/skhd/skhdrc` |
+| [skhd/toggle-fill.swift](skhd/toggle-fill.swift) | Native Fill toggle source; installed and compiled in `~/.config/skhd/` |
 | [whichspace/settings.plist](whichspace/settings.plist) | Fn+Shift+1–5 bindings and the explicitly configured menu-bar options |
 | [macos/fn-desktops.plist](macos/fn-desktops.plist) | Native Fn+1–5 bindings, symbolic hotkey IDs 118–122 |
 | [backups](backups/) | Full live preference exports and skhd snapshots, including machine-specific state |
@@ -60,7 +71,8 @@ Repeated Herdr and incognito shortcuts request new instances/windows.
 
 ## Set up or restore
 
-Requires macOS, Homebrew, and Python 3. The app bindings expect Ghostty and Google
+Requires macOS 26 or newer, Homebrew, Python 3, and Xcode Command Line Tools
+(`xcode-select --install`) to compile the Fill helper. The app bindings expect Ghostty and Google
 Chrome in `/Applications`. Herdr expects the existing executable shim at
 `~/.local/share/mise/shims/herdr`; change that command if your installation differs.
 Calculator and Finder are supplied by macOS.
@@ -91,12 +103,12 @@ already has a working skhd event tap. Permission grants and login-item approvals
 must be configured on each Mac; they are not restored from these files.
 
 The restore command first saves a full rollback snapshot under `backups/`, copies
-the skhd config, and merges the saved WhichSpace keys and native desktop IDs into
+the skhd config and helper source, compiles `~/.config/skhd/toggle-fill`, and merges the saved WhichSpace keys and native desktop IDs into
 the current preferences. Other native shortcuts and machine-specific WhichSpace
 settings are preserved. It restarts WhichSpace if it was running, reloads native
 settings, and asks an already-running skhd to reload. It does not create desktops.
-The restore preview was verified against the live setup; a fresh-Mac restore has
-not yet been exercised.
+Restore and its preview were verified against the live setup, including
+recompiling the Fill helper; a fresh-Mac restore has not yet been exercised.
 
 Keep overlapping BTT launch/desktop bindings disabled when using this stack.
 
@@ -110,8 +122,9 @@ git diff
 ```
 
 This saves full `io.gechr.WhichSpace` and `com.apple.symbolichotkeys` exports plus
-the live skhd config into a timestamped directory under `backups/`. It also
-refreshes the three portable configuration files. Commit the resulting changes
+the live skhd config and Fill helper source into a timestamped directory under `backups/`. It also
+refreshes the portable configuration files. The compiled helper is rebuilt on
+restore rather than committed. Commit the resulting changes
 when they represent the setup you want to retain.
 
 Full WhichSpace snapshots include display/Space IDs, updater state, and its
@@ -132,6 +145,10 @@ Unspecified appearance settings continue to use WhichSpace defaults.
 WhichSpace's recorder strips Fn. Re-recording a shortcut in that UI can remove
 Fn from the saved binding; restore the repo settings to recover it. The Shortcuts
 app is not involved in these desktop or app-launch bindings.
+
+The native **Fill** shortcut (ID 237) stays at its default Fn+Control+F.
+Setting ID 237 to Fn+Option+F did not fire in the physical test on this Mac.
+skhd owns Fn+Option+F instead; the native Fill command itself does not toggle.
 
 ## Herdr configuration
 
