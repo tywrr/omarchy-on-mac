@@ -7,7 +7,7 @@ WhichSpace 1.4.1, and Vorssaint 3.4.1 (101).
 
 The actual Fn/Globe modifier is Super. All user-facing Fn bindings are in
 `skhd/skhdrc`. No Hyper mapping, Right Option substitution, virtual HID driver,
-or alternate window manager is used. The root README lists all 20 actions.
+or alternate window manager is used. The root README lists all active actions.
 
 - macOS symbolic hotkeys 118-122 use ordinary Control+1-5. skhd forwards Fn+1-5.
 - WhichSpace uses Control+Shift+1-5 to move and follow a window; skhd forwards
@@ -43,6 +43,7 @@ explicitly described as physical keyboard confirmation.
 | Emoji picker | Fn+Control+E in a temporary TextEdit document produced a CharacterPalette window. Picker dismissed and test document closed/deleted. |
 | Fill/restore | User confirmed Finder, Chrome, Calendar, and Ghostty. Earlier automated checks passed in Finder and Chrome. |
 | App targets | Installed app IDs and paths, including the mise Neovim shim, were checked. Calendar, Mail, and 1Password were not opened solely for inspection. |
+| Share / LocalSend | Fn+Control+S invoked the launch command successfully and LocalSend became frontmost. Bundle ID `org.localsend.localsendApp`, installed version 1.18.2. No transfer was started. |
 
 An earlier full-screen assertion against Finder's front window failed; its exact
 cause was not isolated. The final check used AXFocusedWindow after activation

@@ -40,6 +40,7 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 | Super + Shift + Option + B | New Chrome incognito window | App launch |
 | Super + Shift + F | Create and focus a new Finder window on every press | Native helper |
 | Super + Control + Q | Open/focus Calculator | App launch |
+| Super + Control + S | Share: open/focus LocalSend | App launch |
 | Super + Shift + C | Open/focus Apple Calendar | App launch |
 | Super + Shift + E | Open/focus Apple Mail | App launch |
 | Super + Shift + / | Open/focus 1Password | App launch |
@@ -111,7 +112,7 @@ Requires macOS 26+, Homebrew, Python 3, and Xcode Command Line Tools
 Ghostty and Chrome in `/Applications`, and Herdr at
 `~/.local/share/mise/shims/herdr`. Neovim uses the existing mise shim at
 `~/.local/share/mise/shims/nvim`. The additional app bindings expect 1Password,
-Apple Calendar, and Apple Mail to be installed. Install and run Vorssaint for clipboard history.
+Apple Calendar, Apple Mail, and LocalSend to be installed. Install and run Vorssaint for clipboard history.
 
 ```sh
 brew install jackielii/tap/skhd-zig

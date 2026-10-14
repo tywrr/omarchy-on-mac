@@ -2,6 +2,7 @@
 
 The initial working snapshot is [2026-10-14T191504Z](2026-10-14T191504Z/).
 The final central-skhd snapshot is [2026-10-14T204838Z](2026-10-14T204838Z/).
+The LocalSend share binding is included in [2026-10-14T234420Z](2026-10-14T234420Z/).
 Each directory contains the full WhichSpace preference domain, the full native
 symbolic-hotkey preference domain, the active skhd config, and capture metadata.
 New snapshots also include the live `toggle-fill.swift` helper source, or a

@@ -45,6 +45,7 @@ CARDS = [
         ("⇧ RET", "Google Chrome", "fn + shift - return"),
         ("⇧⌥ B", "New incognito window", "fn + shift + alt - b"),
         ("⇧ F", "New Finder window", "fn + shift - f"),
+        ("⌃ S", "Share / LocalSend", "fn + ctrl - s"),
     ], "FINDER: A NEW WINDOW EACH PRESS"),
     ("SYSTEM", GOLD, [
         ("W", "Quit app (Command+Q)", "fn - w"),
@@ -147,7 +148,7 @@ def build():
     text(c, 184, 530, "HOLD FN / GLOBE, ADD THE KEYS BELOW", DISPLAY, 13.5)
     text(c, 184, 513, "Every card includes Super. Alt means Option. No prefix sequence.", MONO, 7.4, MUTED)
     text(c, 695, 525, "ACTIONS", MONO, 7.5, MUTED, "right")
-    keycap(c, 708, 511, "20", PURPLE, True, 19, 34, 43)
+    keycap(c, 708, 511, "21", PURPLE, True, 19, 34, 43)
 
     keycap(c, 24, 455, "5", PURPLE, True, 15, 28, 25)
     text(c, 60, 463, "DESKTOP + WINDOW ACTIONS", DISPLAY, 13.5)

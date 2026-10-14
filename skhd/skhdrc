@@ -28,6 +28,9 @@ fn - escape : "$HOME/.config/skhd/toggle-fill" --apple-menu
 # Calculator
 fn + ctrl - q : /usr/bin/open -b com.apple.calculator
 
+# Share (LocalSend)
+fn + ctrl - s : /usr/bin/open -b org.localsend.localsendApp
+
 # Clipboard history: forward to Vorssaint's standard non-Fn shortcut.
 fn + ctrl - v | ctrl + alt + cmd - v
 
