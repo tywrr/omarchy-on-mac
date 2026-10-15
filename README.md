@@ -55,16 +55,17 @@ Command+G advances, and Shift+Return or Command+Shift+G goes back. Command+F
 returns to the search field. Escape closes the panel and restores the previous
 app's focus; clicking another app dismisses it too.
 
-The small AppKit/PDFKit app uses the bundled dark PDFs, has no Dock icon, and
-stays running while hidden for quick reopening. It appears over the current
-desktop rather than creating a fullscreen Space. skhd owns the global hotkeys;
+The small AppKit/PDFKit app uses the bundled dark PDFs and has no Dock icon.
+It launches on demand and quits when dismissed, releasing its document cache
+and process memory. It appears over the current desktop. skhd owns the global hotkeys;
 the panel needs no additional Accessibility or Input Monitoring permission and
 does not save search history.
 
 Restore builds it into `~/Applications/Omarchy Keys.app`. To update only the
 panel after regenerating a PDF or editing its source, run
 `python3 scripts/install_panel.py`. The installer rebuilds only when its source,
-metadata, or bundled PDFs change; an update restarts only the panel helper.
+metadata, or bundled PDFs change; an update stops only the panel helper, which
+launches again on the next hotkey.
 
 ## Current stack
 
