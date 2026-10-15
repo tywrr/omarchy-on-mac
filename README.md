@@ -26,6 +26,26 @@ The Herdr light sheet is the original PDF from `Documents/cheat sheets`, includi
 its printed Herdr 0.8.2 preset and desktop-launch annotations. For the current
 macOS launch shortcuts, use the Omarchy on Mac sheet or the table below.
 
+## Searchable keyboard panel
+
+**Fn+K** opens the macOS sheet; **Fn+Control+K** opens the Herdr sheet. Repeating
+the same shortcut toggles its panel, and the other shortcut switches sheets.
+Search has focus immediately. Type a word to highlight matches; Return or
+Command+G advances, and Shift+Return or Command+Shift+G goes back. Command+F
+returns to the search field. Escape closes the panel and restores the previous
+app's focus; clicking another app dismisses it too.
+
+The small AppKit/PDFKit app uses the bundled dark PDFs, has no Dock icon, and
+stays running while hidden for quick reopening. It appears over the current
+desktop rather than creating a fullscreen Space. skhd owns the global hotkeys;
+the panel needs no additional Accessibility or Input Monitoring permission and
+does not save search history.
+
+Restore builds it into `~/Applications/Omarchy Keys.app`. To update only the
+panel after regenerating a PDF or editing its source, run
+`python3 scripts/install_panel.py`. The installer rebuilds only when its source,
+metadata, or bundled PDFs change; an update restarts only the panel helper.
+
 ## Current stack
 
 | Component | Responsibility | Version used |
@@ -46,6 +66,8 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 
 | Shortcut | Action | Target |
 |---|---|---|
+| Super + K | Show/toggle the searchable macOS keyboard sheet | Native panel |
+| Super + Control + K | Show/toggle the searchable Herdr keyboard sheet | Native panel |
 | Super + Return | Open a new Ghostty terminal window on every press | App launch |
 | Super + Control + Return | Start Herdr in a new Ghostty instance | App launch |
 | Super + Shift + Return | Open/focus Chrome | App launch |
@@ -127,6 +149,8 @@ Fn configured directly in macOS/WhichSpace describe the superseded setup.
 |---|---|
 | [skhd/skhdrc](skhd/skhdrc) | Central Fn bindings; installed at `~/.config/skhd/skhdrc` |
 | [skhd/toggle-fill.swift](skhd/toggle-fill.swift) | Native Accessibility helper source |
+| [panel](panel/) | Native searchable PDF panel source and bundle metadata |
+| [scripts/install_panel.py](scripts/install_panel.py) | Build the panel and bundle both dark PDFs |
 | [macos/desktop-shortcuts.plist](macos/desktop-shortcuts.plist) | Native Control+1–5 bindings, symbolic IDs 118–122 |
 | [whichspace/settings.plist](whichspace/settings.plist) | Control+Shift+1–5 Move bindings and menu-bar appearance |
 | [vorssaint/settings.plist](vorssaint/settings.plist) | Only clipboard shortcut configuration; no history |

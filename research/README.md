@@ -7,6 +7,8 @@ and unresolved questions in them may predate the subsequent working setup.
 
 ## Working configuration
 
+- [Native keyboard panel](2026-10-14-native-keyboard-panel.md): searchable dark
+  macOS and Herdr sheets on Fn+K and Fn+Control+K, with Escape dismissal.
 - [Central skhd routing](2026-10-14-central-skhd-routing.md): current Fn map;
   native Control+1–5, WhichSpace Control+Shift+1–5, clipboard, and system actions.
 - [Native Fill toggle](2026-10-14-native-fill-toggle.md): Fn+Option+F;
