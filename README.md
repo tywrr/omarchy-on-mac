@@ -9,10 +9,22 @@ Fn stays a real modifier. Shift, Control, and Option remain separate layers;
 Command keeps its usual macOS shortcuts. No Hyper or Right Option remapping is
 needed.
 
-Print the one-page [keyboard wall sheet](output/pdf/omarchy-on-mac-keybindings.pdf),
-styled to match the Herdr Omarchy cheatsheet. Rebuild it with
-`uv run scripts/build_cheatsheet.py`; the builder checks its shortcut coverage
-against `skhd/skhdrc`. Its fonts and licenses are included in `assets/fonts/`.
+The one-page keyboard wall sheets are available in both themes:
+
+| Sheet | Light | Dark |
+|---|---|---|
+| Omarchy on Mac - current Fn shortcuts | [PDF](output/pdf/omarchy-on-mac-keybindings.pdf) | [PDF](output/pdf/omarchy-on-mac-keybindings-dark.pdf) |
+| Herdr - original Omarchy keymap reference | [PDF](output/pdf/herdr-keybindings-omarchy.pdf) | [PDF](output/pdf/herdr-keybindings-omarchy-dark.pdf) |
+
+Rebuild the macOS light sheet with `uv run scripts/build_cheatsheet.py`; the
+builder checks shortcut coverage against `skhd/skhdrc`. Then run
+`uv run scripts/build_dark_cheatsheets.py` to regenerate both dark sheets.
+The dark versions preserve selectable text, vector artwork, and the original
+layout. Fonts and licenses for the macOS builder are in `assets/fonts/`.
+
+The Herdr light sheet is the original PDF from `Documents/cheat sheets`, including
+its printed Herdr 0.8.2 preset and desktop-launch annotations. For the current
+macOS launch shortcuts, use the Omarchy on Mac sheet or the table below.
 
 ## Current stack
 
