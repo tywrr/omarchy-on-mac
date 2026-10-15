@@ -45,6 +45,8 @@ explicitly described as physical keyboard confirmation.
 | App targets | Installed app IDs and paths, including the mise Neovim shim, were checked. Calendar, Mail, and 1Password were not opened solely for inspection. |
 | Share / LocalSend | Fn+Control+S invoked the launch command successfully and LocalSend became frontmost. Bundle ID `org.localsend.localsendApp`, installed version 1.18.2. No transfer was started. |
 | New terminal window | Fn+Return and its keypad-Enter variant each created one additional Ghostty window. The two new test windows were closed; the existing window was preserved. Uses `open -na /Applications/Ghostty.app` to create a new instance/window on every press. |
+| Native Accessibility Zoom | `UAZoomEnabled()` reported false at normal scale, true after Fn+Control+Z, then false after Fn+Control+Option+Z following two zoom-in presses. Repeating reset remained false. Display was left fully zoomed out. |
+| LazyDocker | Fn+Shift+D started a new LazyDocker process in Ghostty through the existing mise shim. Installed version 0.25.2; OrbStack's Docker socket was available. No container actions were performed. |
 
 An earlier full-screen assertion against Finder's front window failed; its exact
 cause was not isolated. The final check used AXFocusedWindow after activation
@@ -62,6 +64,14 @@ No latency improvement is claimed for Fill. Earlier profiling measured roughly
 the behavior was better and moved on. Forwarded chords now avoid a process launch.
 
 ## Portability and snapshots
+
+Zoom-in forwards to native Option+Command+= (physical equals keycode 24).
+Full reset uses the public `UAZoomEnabled()` API, then invokes the already
+authorized skhd binary to post Option+Command+8 only while zoomed in. The installed
+macOS SDK's `HIServices.framework/Headers/UniversalAccess.h` explicitly documents
+false when Zoom is off or the user is fully zoomed out. No extra helper permission
+is required. Enable native keyboard Zoom in System Settings; the portable restore
+does not modify Accessibility Zoom preferences.
 
 `macos/desktop-shortcuts.plist` replaces the earlier `fn-desktops.plist` name.
 The settings script merges only desktop IDs 118-122 and selected WhichSpace

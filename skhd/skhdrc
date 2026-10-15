@@ -22,6 +22,10 @@ fn - f : "$HOME/.config/skhd/toggle-fill" --fullscreen
 fn + ctrl - l | ctrl + cmd - q
 fn + ctrl - e | ctrl + cmd - space
 
+# Native Accessibility Zoom: Option+Command+=; reset only when zoomed in.
+fn + ctrl - z | alt + cmd - 0x18
+fn + ctrl + alt - z : "$HOME/.config/skhd/toggle-fill" --zoom-reset
+
 # Open the Apple menu (Sleep, Restart, Shut Down, ...).
 fn - escape : "$HOME/.config/skhd/toggle-fill" --apple-menu
 
@@ -40,6 +44,9 @@ fn + shift - e : /usr/bin/open -b com.apple.mail
 # Physical slash key: Shift+/ is ? on the current keyboard.
 fn + shift - 0x2c : /usr/bin/open -b com.1password.1password
 fn + shift - n : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/nvim"
+
+# Containers (LazyDocker in a new Ghostty instance)
+fn + shift - d : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.local/share/mise/shims/lazydocker"
 
 # Terminal: create a new Ghostty instance/window on every press.
 fn - return : /usr/bin/open -na /Applications/Ghostty.app

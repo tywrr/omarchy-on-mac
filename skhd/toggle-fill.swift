@@ -1,4 +1,4 @@
-// Native Fill, full-screen, Apple menu, and new Finder window actions.
+// Native window/menu actions and Accessibility Zoom reset.
 // Requires English app menu titles and Accessibility access for the caller.
 import AppKit
 import ApplicationServices
@@ -108,6 +108,22 @@ func showAppleMenu() throws {
     try press(child(menuBar))
 }
 
+func resetZoom() throws {
+    // The public Universal Access API is false when fully zoomed out. Avoid
+    // toggling native Zoom back in when the user is already at normal scale.
+    guard UAZoomEnabled() else { return }
+    // Post native Option+Command+8 through the already-authorized skhd binary.
+    // This avoids requiring event-posting permission for a separate helper.
+    let command = Process()
+    command.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    command.arguments = ["skhd", "--key", "alt + cmd - 8"]
+    try command.run()
+    command.waitUntilExit()
+    guard command.terminationStatus == 0 else {
+        throw Failure(description: "skhd could not post the native Zoom toggle")
+    }
+}
+
 do {
     switch CommandLine.arguments.dropFirst().first {
     case "--apple-menu":
@@ -116,6 +132,8 @@ do {
         try newFinderWindow()
     case "--fullscreen":
         try toggleFullScreen()
+    case "--zoom-reset":
+        try resetZoom()
     case nil:
         try toggleFill()
     default:

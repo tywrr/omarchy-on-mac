@@ -34,6 +34,7 @@ CARDS = [
         ("⌃ RET", "Herdr / new terminal", "fn + ctrl - return"),
         ("⇧ N", "Neovim / new terminal", "fn + shift - n"),
         ("⌃ Q", "Calculator", "fn + ctrl - q"),
+        ("⇧ D", "LazyDocker", "fn + shift - d"),
     ], "HERDR PREFIX: CONTROL + SPACE"),
     ("DAILY APPS", TEAL, [
         ("⇧ C", "Apple Calendar", "fn + shift - c"),
@@ -52,6 +53,8 @@ CARDS = [
         ("ESC", "Apple system menu", "fn - escape"),
         ("⌃ L", "Lock Screen", "fn + ctrl - l"),
         ("⌃ E", "Emoji & Symbols", "fn + ctrl - e"),
+        ("⌃ Z", "Zoom in", "fn + ctrl - z"),
+        ("⌃⌥ Z", "Fully zoom out", "fn + ctrl + alt - z"),
     ], "CAPS LOCK IS REMAPPED TO ESCAPE"),
 ]
 HIGHLIGHTS = [
@@ -148,7 +151,8 @@ def build():
     text(c, 184, 530, "HOLD FN / GLOBE, ADD THE KEYS BELOW", DISPLAY, 13.5)
     text(c, 184, 513, "Every card includes Super. Alt means Option. No prefix sequence.", MONO, 7.4, MUTED)
     text(c, 695, 525, "ACTIONS", MONO, 7.5, MUTED, "right")
-    keycap(c, 708, 511, "21", PURPLE, True, 19, 34, 43)
+    action_count = len(HIGHLIGHTS) + sum(len(rows) for _, _, rows, _ in CARDS)
+    keycap(c, 708, 511, str(action_count), PURPLE, True, 19, 34, 43)
 
     keycap(c, 24, 455, "5", PURPLE, True, 15, 28, 25)
     text(c, 60, 463, "DESKTOP + WINDOW ACTIONS", DISPLAY, 13.5)
@@ -182,8 +186,9 @@ def build():
         c.setLineWidth(.5)
         c.line(x + 12, 255, x + card_width - 12, 255)
         for j, (chord, label, _) in enumerate(rows):
-            y = 218 - 31 * j
-            keycap(c, x + 11, y, chord, size=11, height=25, fixed_width=51)
+            y = 228 - 23 * j if len(rows) > 4 else 218 - 31 * j
+            height = 22 if len(rows) > 4 else 25
+            keycap(c, x + 11, y, chord, size=11, height=height, fixed_width=51)
             text(c, x + 70, y + 8, label, LABEL, 8.1)
         text(c, x + 11, 103, note, MONO, 5.9, MUTED)
 
