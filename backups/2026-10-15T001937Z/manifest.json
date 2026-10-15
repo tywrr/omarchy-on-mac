@@ -1,0 +1,20 @@
+{
+  "captured_at_utc": "2026-10-15T00:19:37.634098+00:00",
+  "skhd_config_source": "~/.config/skhd/skhdrc",
+  "skhd_config_present": true,
+  "fill_helper_source": "~/.config/skhd/toggle-fill.swift",
+  "fill_helper_present": true,
+  "preference_domains": [
+    "io.gechr.WhichSpace",
+    "com.apple.symbolichotkeys"
+  ],
+  "vorssaint_shortcut_keys": [
+    "featureAvailable.clipboardHistory",
+    "clipboardHistoryEnabled",
+    "clipboardHistoryShortcutEnabled",
+    "clipboardHistoryShortcut"
+  ],
+  "vorssaint_keys_absent": [],
+  "vorssaint_scope": "Clipboard shortcut configuration only; no history or content.",
+  "scope": "Full preference snapshots; Space/display IDs are machine-specific."
+}

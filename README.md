@@ -46,6 +46,7 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 | Super + Shift + / | Open/focus 1Password | App launch |
 | Super + Shift + N | Start Neovim in a new Ghostty instance | App launch |
 | Super + Shift + D | Start LazyDocker in a new Ghostty window | App launch |
+| Super + Control + T | Activity: start btop in a new Ghostty window | App launch |
 | Super + Control + V | Toggle Vorssaint clipboard history | Control+Option+Command+V |
 | Super + 1–5 | Switch to Desktop 1–5 | Native Control+1–5 |
 | Super + Shift + 1–5 | Move the focused window to Desktop 1–5 and follow it | WhichSpace Control+Shift+1–5 |
@@ -129,7 +130,8 @@ Ghostty and Chrome in `/Applications`, and Herdr at
 `~/.local/share/mise/shims/herdr`. Neovim uses the existing mise shim at
 `~/.local/share/mise/shims/nvim`. LazyDocker uses
 `~/.local/share/mise/shims/lazydocker` and requires a running Docker-compatible
-engine (OrbStack on this Mac). The additional app bindings expect 1Password,
+engine (OrbStack on this Mac). Activity uses Homebrew's `/opt/homebrew/bin/btop`
+(`brew install btop` on Apple Silicon). The additional app bindings expect 1Password,
 Apple Calendar, Apple Mail, and LocalSend to be installed. Install and run Vorssaint for clipboard history.
 
 ```sh

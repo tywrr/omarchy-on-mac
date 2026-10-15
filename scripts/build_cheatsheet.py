@@ -35,6 +35,7 @@ CARDS = [
         ("⇧ N", "Neovim / new terminal", "fn + shift - n"),
         ("⌃ Q", "Calculator", "fn + ctrl - q"),
         ("⇧ D", "LazyDocker", "fn + shift - d"),
+        ("⌃ T", "Activity / btop", "fn + ctrl - t"),
     ], "HERDR PREFIX: CONTROL + SPACE"),
     ("DAILY APPS", TEAL, [
         ("⇧ C", "Apple Calendar", "fn + shift - c"),
