@@ -51,6 +51,9 @@ fn + shift - d : /usr/bin/open -na /Applications/Ghostty.app --args -e "$HOME/.l
 # Activity (btop in a new Ghostty instance)
 fn + ctrl - t : /usr/bin/open -na /Applications/Ghostty.app --args -e /opt/homebrew/bin/btop
 
+# Wi-Fi settings
+fn + ctrl - w : /usr/bin/open "x-apple.systempreferences:com.apple.wifi-settings-extension"
+
 # Terminal: create a new Ghostty instance/window on every press.
 fn - return : /usr/bin/open -na /Applications/Ghostty.app
 

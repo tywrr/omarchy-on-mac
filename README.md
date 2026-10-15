@@ -47,6 +47,7 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 | Super + Shift + N | Start Neovim in a new Ghostty instance | App launch |
 | Super + Shift + D | Start LazyDocker in a new Ghostty window | App launch |
 | Super + Control + T | Activity: start btop in a new Ghostty window | App launch |
+| Super + Control + W | Open Wi-Fi settings | Native System Settings URL |
 | Super + Control + V | Toggle Vorssaint clipboard history | Control+Option+Command+V |
 | Super + 1–5 | Switch to Desktop 1–5 | Native Control+1–5 |
 | Super + Shift + 1–5 | Move the focused window to Desktop 1–5 and follow it | WhichSpace Control+Shift+1–5 |
