@@ -29,6 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSSearchFieldDelegate,
     private var previousApp: NSRunningApplication?
     private var keyMonitor: Any?
     private var pendingSearch: DispatchWorkItem?
+    private var isDismissing = false
 
     override init() {
         super.init()
@@ -47,7 +48,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSSearchFieldDelegate,
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         preparePanel()
-        // URL events also reach a running instance; keep the panel ready while hidden.
+        // The hotkey URL selects the sheet; dismissal terminates this process.
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
@@ -179,6 +180,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSSearchFieldDelegate,
                 alert.messageText = "The shortcut sheet could not be opened."
                 alert.informativeText = "Reinstall Omarchy Keys from the repository."
                 alert.runModal()
+                dismiss()
                 return
             }
             documents[requested] = document
@@ -245,14 +247,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSSearchFieldDelegate,
         highlightMatches()
     }
 
-    private func dismiss() {
+    private func dismiss(restoreFocus: Bool = true) {
+        guard !isDismissing else { return }
+        isDismissing = true
         pendingSearch?.cancel()
-        let restoreFocus = NSApp.isActive
+        let shouldRestoreFocus = restoreFocus && NSApp.isActive
         panel.orderOut(nil)
-        NSApp.hide(nil)
-        if restoreFocus, let previousApp, !previousApp.isTerminated {
+        if shouldRestoreFocus, let previousApp, !previousApp.isTerminated {
             previousApp.activate(options: [])
         }
+        NSApp.terminate(nil)
     }
 
     func windowShouldClose(_ sender: NSWindow) -> Bool {
@@ -261,8 +265,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSSearchFieldDelegate,
     }
 
     func applicationDidResignActive(_ notification: Notification) {
-        pendingSearch?.cancel()
-        panel?.orderOut(nil)
+        guard panel?.isVisible == true else { return }
+        dismiss(restoreFocus: false)
     }
 }
 

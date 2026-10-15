@@ -9,6 +9,8 @@ Activity/btop is included in [2026-10-15T002044Z](2026-10-15T002044Z/).
 Wi-Fi settings are included in [2026-10-15T002257Z](2026-10-15T002257Z/).
 The searchable keyboard panel and its two hotkeys are included in
 [2026-10-15T015253Z](2026-10-15T015253Z/).
+The panel's quit-on-dismiss default is included in
+[2026-10-15T022101Z](2026-10-15T022101Z/).
 Each directory contains the full WhichSpace preference domain, the full native
 symbolic-hotkey preference domain, the active skhd config, and capture metadata.
 New snapshots also include the live `toggle-fill.swift` helper source, or a

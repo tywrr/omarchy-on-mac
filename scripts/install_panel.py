@@ -59,7 +59,7 @@ def install():
         subprocess.run(["/usr/bin/xcrun", "swiftc", "-O", str(INPUTS[0]), "-o", str(executable)], check=True)
         subprocess.run(["/usr/bin/codesign", "--force", "--sign", "-", str(staging)], check=True)
 
-        # Only this helper is restarted; no terminal or other app is touched.
+        # Stop only this helper. The next hotkey launches the updated app.
         running = subprocess.run(["/usr/bin/pgrep", "-x", "OmarchyKeys"], capture_output=True, text=True)
         if running.returncode not in (0, 1):
             raise RuntimeError("Could not check the running shortcut panel")
