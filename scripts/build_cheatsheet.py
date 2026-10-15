@@ -42,6 +42,7 @@ CARDS = [
         ("⇧ E", "Apple Mail", "fn + shift - e"),
         ("⇧ /", "1Password", "fn + shift - 0x2c"),
         ("⌃ V", "Clipboard history", "fn + ctrl - v"),
+        ("⌃ W", "Wi-Fi settings", "fn + ctrl - w"),
     ], "CLIPBOARD: PRESS AGAIN TO CLOSE"),
     ("BROWSER + FILES", GREEN, [
         ("⇧ RET", "Google Chrome", "fn + shift - return"),

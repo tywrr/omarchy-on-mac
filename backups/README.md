@@ -6,6 +6,7 @@ The LocalSend share binding is included in [2026-10-14T234420Z](2026-10-14T23442
 The new-window Ghostty launcher is included in [2026-10-14T235753Z](2026-10-14T235753Z/).
 Zoom controls and LazyDocker are included in [2026-10-15T001800Z](2026-10-15T001800Z/).
 Activity/btop is included in [2026-10-15T002044Z](2026-10-15T002044Z/).
+Wi-Fi settings are included in [2026-10-15T002257Z](2026-10-15T002257Z/).
 Each directory contains the full WhichSpace preference domain, the full native
 symbolic-hotkey preference domain, the active skhd config, and capture metadata.
 New snapshots also include the live `toggle-fill.swift` helper source, or a
