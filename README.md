@@ -16,9 +16,29 @@ The one-page keyboard wall sheets are available in both themes:
 | Omarchy on Mac - current Fn shortcuts | [PDF](output/pdf/omarchy-on-mac-keybindings.pdf) | [PDF](output/pdf/omarchy-on-mac-keybindings-dark.pdf) |
 | Herdr - original Omarchy keymap reference | [PDF](output/pdf/herdr-keybindings-omarchy.pdf) | [PDF](output/pdf/herdr-keybindings-omarchy-dark.pdf) |
 
+**macOS shortcuts**
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/previews/omarchy-on-mac-keybindings-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/previews/omarchy-on-mac-keybindings.png">
+  <img alt="Omarchy on Mac keyboard sheet: Fn desktop, window, app, and system shortcuts" src="assets/previews/omarchy-on-mac-keybindings.png" width="1100">
+</picture>
+
+**Herdr shortcuts**
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/previews/herdr-keybindings-omarchy-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/previews/herdr-keybindings-omarchy.png">
+  <img alt="Herdr Omarchy keyboard sheet: pane, tab, workspace, and session shortcuts" src="assets/previews/herdr-keybindings-omarchy.png" width="1100">
+</picture>
+
+Previews follow GitHub's light or dark theme. Use the PDF links above for the
+full-size printable sheets.
+
 Rebuild the macOS light sheet with `uv run scripts/build_cheatsheet.py`; the
 builder checks shortcut coverage against `skhd/skhdrc`. Then run
-`uv run scripts/build_dark_cheatsheets.py` to regenerate both dark sheets.
+`uv run scripts/build_dark_cheatsheets.py` to regenerate both dark sheets, and
+`uv run scripts/build_previews.py` to refresh all four README images.
 The dark versions preserve selectable text, vector artwork, and the original
 layout. Fonts and licenses for the macOS builder are in `assets/fonts/`.
 
@@ -151,6 +171,7 @@ Fn configured directly in macOS/WhichSpace describe the superseded setup.
 | [skhd/toggle-fill.swift](skhd/toggle-fill.swift) | Native Accessibility helper source |
 | [panel](panel/) | Native searchable PDF panel source and bundle metadata |
 | [scripts/install_panel.py](scripts/install_panel.py) | Build the panel and bundle both dark PDFs |
+| [assets/previews](assets/previews/) | Light/dark PNG sheets displayed in this README |
 | [macos/desktop-shortcuts.plist](macos/desktop-shortcuts.plist) | Native Control+1–5 bindings, symbolic IDs 118–122 |
 | [whichspace/settings.plist](whichspace/settings.plist) | Control+Shift+1–5 Move bindings and menu-bar appearance |
 | [vorssaint/settings.plist](vorssaint/settings.plist) | Only clipboard shortcut configuration; no history |
