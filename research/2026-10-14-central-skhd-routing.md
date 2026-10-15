@@ -47,6 +47,7 @@ explicitly described as physical keyboard confirmation.
 | New terminal window | Fn+Return and its keypad-Enter variant each created one additional Ghostty window. The two new test windows were closed; the existing window was preserved. Uses `open -na /Applications/Ghostty.app` to create a new instance/window on every press. |
 | Native Accessibility Zoom | `UAZoomEnabled()` reported false at normal scale, true after Fn+Control+Z, then false after Fn+Control+Option+Z following two zoom-in presses. Repeating reset remained false. Display was left fully zoomed out. |
 | LazyDocker | Fn+Shift+D started a new LazyDocker process in Ghostty through the existing mise shim. Installed version 0.25.2; OrbStack's Docker socket was available. No container actions were performed. |
+| Activity / btop | Fn+Control+T started a new btop process in a new Ghostty instance. Homebrew executable `/opt/homebrew/bin/btop`, version 1.4.7. |
 
 An earlier full-screen assertion against Finder's front window failed; its exact
 cause was not isolated. The final check used AXFocusedWindow after activation
