@@ -45,6 +45,7 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 | Super + Shift + E | Open/focus Apple Mail | App launch |
 | Super + Shift + / | Open/focus 1Password | App launch |
 | Super + Shift + N | Start Neovim in a new Ghostty instance | App launch |
+| Super + Shift + D | Start LazyDocker in a new Ghostty window | App launch |
 | Super + Control + V | Toggle Vorssaint clipboard history | Control+Option+Command+V |
 | Super + 1–5 | Switch to Desktop 1–5 | Native Control+1–5 |
 | Super + Shift + 1–5 | Move the focused window to Desktop 1–5 and follow it | WhichSpace Control+Shift+1–5 |
@@ -55,6 +56,8 @@ BetterTouchTool presets remain under [legacy/bettertouchtool](legacy/bettertouch
 | Super + Escape | Open the Apple menu (Sleep, Restart, etc.) | Native helper |
 | Super + Control + L | Lock Screen | Control+Command+Q |
 | Super + Control + E | Emoji & Symbols picker | Control+Command+Space |
+| Super + Control + Z | Zoom in one step | Native Option+Command+= |
+| Super + Control + Option + Z | Fully zoom out; no change if already out | Native helper |
 
 Fn+W quits the application, as requested; Command+W remains the ordinary close-window
 shortcut. A Caps Lock key already remapped to Escape should also trigger Fn+Escape.
@@ -65,6 +68,13 @@ a new instance/window even when Ghostty is already running.
 
 **Trackpad:** a three-finger swipe left or right switches desktops on both
 Omarchy and macOS.
+
+Zoom uses **System Settings → Accessibility → Zoom → Use keyboard shortcuts to
+zoom**. Keep the native Zoom shortcuts enabled: Option+Command+= to zoom in,
+Option+Command+- to zoom out, and Option+Command+8 to toggle. The reset helper
+checks the public `UAZoomEnabled()` API before invoking the toggle, so pressing
+reset while already fully out does not zoom back in. Zoom preferences remain
+managed in System Settings and are not changed by the portable restore script.
 
 ## How forwarding works
 
@@ -85,7 +95,8 @@ fn + ctrl - v | ctrl + alt + cmd - v
 ```
 
 The small [native helper](skhd/toggle-fill.swift) handles Fill, full screen,
-opening the Apple menu, and creating new Finder windows through Accessibility. Restore compiles it
+opening the Apple menu, creating new Finder windows, and resetting Accessibility
+Zoom. Restore compiles it
 as `~/.config/skhd/toggle-fill`. It runs only when invoked. Fill uses macOS's own
 previous-size history; no custom window-position store is maintained. Its Fill
 and Finder menu lookups currently require English menu titles. Full-screen and
@@ -116,7 +127,9 @@ Requires macOS 26+, Homebrew, Python 3, and Xcode Command Line Tools
 (`xcode-select --install`) to build the native helper. App launches expect
 Ghostty and Chrome in `/Applications`, and Herdr at
 `~/.local/share/mise/shims/herdr`. Neovim uses the existing mise shim at
-`~/.local/share/mise/shims/nvim`. The additional app bindings expect 1Password,
+`~/.local/share/mise/shims/nvim`. LazyDocker uses
+`~/.local/share/mise/shims/lazydocker` and requires a running Docker-compatible
+engine (OrbStack on this Mac). The additional app bindings expect 1Password,
 Apple Calendar, Apple Mail, and LocalSend to be installed. Install and run Vorssaint for clipboard history.
 
 ```sh
