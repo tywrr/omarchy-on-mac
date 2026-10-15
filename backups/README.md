@@ -7,11 +7,17 @@ The new-window Ghostty launcher is included in [2026-10-14T235753Z](2026-10-14T2
 Zoom controls and LazyDocker are included in [2026-10-15T001800Z](2026-10-15T001800Z/).
 Activity/btop is included in [2026-10-15T002044Z](2026-10-15T002044Z/).
 Wi-Fi settings are included in [2026-10-15T002257Z](2026-10-15T002257Z/).
+The searchable keyboard panel and its two hotkeys are included in
+[2026-10-15T015253Z](2026-10-15T015253Z/).
 Each directory contains the full WhichSpace preference domain, the full native
 symbolic-hotkey preference domain, the active skhd config, and capture metadata.
 New snapshots also include the live `toggle-fill.swift` helper source, or a
 `NO_PREVIOUS_FILL_HELPER` marker if it was absent. The compiled executable is
 derived from the source and is not stored.
+Panel snapshots include `keys-panel/` with its Swift source, bundle metadata,
+build fingerprint, and both bundled dark PDFs, or `NO_PREVIOUS_KEYS_PANEL` when
+it was absent. They exclude the compiled app and search history. Portable
+restore rebuilds the app from the repository using `scripts/install_panel.py`.
 Current snapshots also save `com.vorssaint.utils.clipboard-shortcuts.plist` with
 only the four clipboard availability/enable/shortcut keys. No clipboard entries
 or other Vorssaint preferences are included. The manifest records any keys that

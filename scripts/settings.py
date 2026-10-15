@@ -12,6 +12,8 @@ import sys
 import tempfile
 import time
 
+from install_panel import APP as PANEL_APP, PDF_NAMES, install as install_panel, needs_install as panel_needs_install
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LIVE_SKHD = Path.home() / ".config/skhd/skhdrc"
@@ -91,6 +93,8 @@ def snapshot(output=None, refresh=False):
     vorssaint = clipboard_preferences()
     skhd = LIVE_SKHD.read_bytes() if LIVE_SKHD.exists() else None
     helper = LIVE_HELPER.read_bytes() if LIVE_HELPER.exists() else None
+    panel_resources = PANEL_APP / "Contents/Resources"
+    panel_present = (PANEL_APP / "Contents/MacOS/OmarchyKeys").exists()
     native_hotkeys = symbolic.get("AppleSymbolicHotKeys", {})
     if refresh:
         if skhd is None:
@@ -112,6 +116,14 @@ def snapshot(output=None, refresh=False):
         (directory / "NO_PREVIOUS_FILL_HELPER").touch()
     else:
         (directory / HELPER_NAME).write_bytes(helper)
+    if panel_present:
+        panel_backup = directory / "keys-panel"
+        panel_backup.mkdir()
+        shutil.copyfile(PANEL_APP / "Contents/Info.plist", panel_backup / "Info.plist")
+        for name in ("OmarchyKeys.swift", "build.sha256", *PDF_NAMES):
+            shutil.copyfile(panel_resources / name, panel_backup / name)
+    else:
+        (directory / "NO_PREVIOUS_KEYS_PANEL").touch()
     (directory / "manifest.json").write_text(
         json.dumps(
             {
@@ -120,6 +132,9 @@ def snapshot(output=None, refresh=False):
                 "skhd_config_present": skhd is not None,
                 "fill_helper_source": f"~/.config/skhd/{HELPER_NAME}",
                 "fill_helper_present": helper is not None,
+                "keys_panel_present": panel_present,
+                "keys_panel_app": "~/Applications/Omarchy Keys.app",
+                "keys_panel_scope": "Source, bundle metadata, and PDFs; no compiled executable or search history.",
                 "preference_domains": [WHICHSPACE, SYMBOLIC],
                 "vorssaint_shortcut_keys": list(VORSSAINT_KEYS),
                 "vorssaint_keys_absent": [key for key in VORSSAINT_KEYS if key not in vorssaint],
@@ -198,8 +213,10 @@ def restore(dry_run):
         not LIVE_HELPER.exists() or LIVE_HELPER.read_bytes() != desired_helper
         or not LIVE_HELPER_BINARY.exists()
     )
+    panel_changes = panel_needs_install()
     print(f"skhd config differs: {config_changes}")
     print(f"Fill helper differs: {helper_changes}")
+    print(f"Shortcut panel differs: {panel_changes}")
     print(f"WhichSpace keys to change: {whichspace_changes}")
     print(f"Vorssaint clipboard shortcut keys to change: {vorssaint_changes}")
     print(f"Native desktop shortcut IDs to change: {native_changes}")
@@ -210,6 +227,10 @@ def restore(dry_run):
 
     # Preserve the entire previous state, including an absent skhd config.
     snapshot()
+
+    # Build the local UI before changing the shortcuts that summon it.
+    if panel_changes:
+        install_panel()
 
     # Compile before changing preferences. The binary is derived from the saved
     # source; only the source is portable and tracked in git.

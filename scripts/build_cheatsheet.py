@@ -66,6 +66,10 @@ HIGHLIGHTS = [
     ("F", "FULL SCREEN", "TOGGLE NATIVE FULL SCREEN", GREEN),
     ("SPACE", "SPOTLIGHT", "SEARCH APPS AND MORE", RED),
 ]
+HELP_SHORTCUTS = [
+    ("Fn+K", "macOS keys", "fn - k"),
+    ("Fn+Ctrl+K", "Herdr keys", "fn + ctrl - k"),
+]
 
 
 def verify_coverage():
@@ -73,6 +77,7 @@ def verify_coverage():
     documented |= {f"fn - {n}" for n in range(1, 6)}
     documented |= {f"fn + shift - {n}" for n in range(1, 6)}
     documented |= {"fn + alt - f", "fn - f", "fn - space"}
+    documented |= {row[2] for row in HELP_SHORTCUTS}
     configured = set()
     for line in (ROOT / "skhd/skhdrc").read_text().splitlines():
         if line.startswith("fn "):
@@ -153,7 +158,7 @@ def build():
     text(c, 184, 530, "HOLD FN / GLOBE, ADD THE KEYS BELOW", DISPLAY, 13.5)
     text(c, 184, 513, "Every card includes Super. Alt means Option. No prefix sequence.", MONO, 7.4, MUTED)
     text(c, 695, 525, "ACTIONS", MONO, 7.5, MUTED, "right")
-    action_count = len(HIGHLIGHTS) + sum(len(rows) for _, _, rows, _ in CARDS)
+    action_count = len(HIGHLIGHTS) + len(HELP_SHORTCUTS) + sum(len(rows) for _, _, rows, _ in CARDS)
     keycap(c, 708, 511, str(action_count), PURPLE, True, 19, 34, 43)
 
     keycap(c, 24, 455, "5", PURPLE, True, 15, 28, 25)
@@ -197,7 +202,8 @@ def build():
     c.setStrokeColor(BORDER)
     c.setFillColor(HexColor("#F5F3EE"))
     c.roundRect(24, 39, 744, 45, 3, stroke=1, fill=1)
-    text(c, 37, 70, "NATIVE MAC DESKTOPS + WHICHSPACE + SKHD.ZIG", MONO, 7.1, MUTED)
+    help_line = "  /  ".join(f"{chord}: {label}" for chord, label, _ in HELP_SHORTCUTS)
+    text(c, 37, 70, help_line + "  /  Esc closes help", LABEL, 8.1, MUTED)
     text(c, 37, 58, "3-finger swipe left / right: switch desktops on both Omarchy and macOS.", LABEL, 8.1)
     text(c, 37, 47, "Fill restores the previous size. Full screen uses its own Space. Fn+W quits the whole app.", LABEL, 7.8)
     text(c, 755, 70, "⌘W: CLOSE ONE WINDOW", MONO, 7.1, MUTED, "right")

@@ -22,6 +22,10 @@ fn - f : "$HOME/.config/skhd/toggle-fill" --fullscreen
 fn + ctrl - l | ctrl + cmd - q
 fn + ctrl - e | ctrl + cmd - space
 
+# Searchable native keyboard sheets.
+fn - k : /usr/bin/open -a "$HOME/Applications/Omarchy Keys.app" "omarchy-keys://mac"
+fn + ctrl - k : /usr/bin/open -a "$HOME/Applications/Omarchy Keys.app" "omarchy-keys://herdr"
+
 # Native Accessibility Zoom: Option+Command+=; reset only when zoomed in.
 fn + ctrl - z | alt + cmd - 0x18
 fn + ctrl + alt - z : "$HOME/.config/skhd/toggle-fill" --zoom-reset
