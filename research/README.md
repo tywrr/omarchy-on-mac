@@ -24,6 +24,8 @@ current working snapshot.
 
 ## Alternatives and native capabilities
 
+- [Searchable shortcut windows](2026-10-14-searchable-shortcut-viewers-third-party.md):
+  native PDF panels, KeyClu, and alternatives for the macOS and Herdr sheets.
 - [Hotkey tools](2026-10-14-hotkey-tools.md)
 - [Native macOS foundation](2026-10-14-native-macos-foundation.md)
 - [Native window and desktop transfers](2026-10-14-native-window-desktop-transfers.md)
